@@ -1,0 +1,1 @@
+A toolbar for the Model Critique Browser main presenter (selected entities side).

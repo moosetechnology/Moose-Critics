@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "RomainDegrave 4/20/2022 13:19",
+	"super" : "StPresenter",
+	"category" : "ModelCritiqueBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"inspectButton",
+		"falsePositiveButton"
+	],
+	"name" : "SpModelCritiqueBrowserEntitiesToolbar",
+	"type" : "normal"
+}

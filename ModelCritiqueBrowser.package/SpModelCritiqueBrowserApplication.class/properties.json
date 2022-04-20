@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "RomainDegrave 4/20/2022 14:08",
+	"super" : "SpApplication",
+	"category" : "ModelCritiqueBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"mainPresenter"
+	],
+	"name" : "SpModelCritiqueBrowserApplication",
+	"type" : "normal"
+}
