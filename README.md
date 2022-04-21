@@ -10,3 +10,9 @@ Metacello new
 	baseline: 'FamixModelCritiqueBrowser';
 	load
 ```
+
+# Launch the Browser
+In a playground:
+```Smalltalk
+SpModelCritiqueBrowserPresenter new open
+```
