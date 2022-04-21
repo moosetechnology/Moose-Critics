@@ -1,6 +1,6 @@
 testing
-canFollowEntity: anObject
+canFollowEntity: anEntity
 
 	"whether the browser accepts to deal with anObject"
 
-	^ true
+	^ anEntity isMooseModel
