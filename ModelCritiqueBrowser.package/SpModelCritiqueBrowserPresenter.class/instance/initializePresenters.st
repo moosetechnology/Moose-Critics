@@ -1,6 +1,8 @@
 accessing
 initializePresenters
-
+	
+	super initializePresenters.
+	
 	critiquesToolbar := self instantiate: SpModelCritiqueBrowserCritiqueToolbar on: self.
 	entitiesToolbar := self instantiate: SpModelCritiqueBrowserEntitiesToolbar on: self.  
 

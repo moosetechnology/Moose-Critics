@@ -1,6 +1,6 @@
 {
 	"commentStamp" : "RomainDegrave 4/19/2022 17:29",
-	"super" : "SpPresenter",
+	"super" : "MiAbstractBrowser",
 	"category" : "ModelCritiqueBrowser",
 	"classinstvars" : [ ],
 	"pools" : [ ],
