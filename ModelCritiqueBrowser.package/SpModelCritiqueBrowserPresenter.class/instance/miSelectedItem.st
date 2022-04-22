@@ -1,4 +1,0 @@
-accessing
-miSelectedItem 
-
-	^ self model
