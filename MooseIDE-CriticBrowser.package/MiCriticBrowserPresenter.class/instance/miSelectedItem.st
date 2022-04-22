@@ -1,0 +1,4 @@
+accessing
+miSelectedItem 
+
+	^ self model

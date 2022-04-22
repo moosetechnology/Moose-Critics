@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "RomainDegrave 4/19/2022 17:29",
+	"super" : "MiAbstractBrowser",
+	"category" : "MooseIDE-CriticBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"critiques",
+		"invalidEntities",
+		"textArea"
+	],
+	"name" : "MiCriticBrowserPresenter",
+	"type" : "normal"
+}

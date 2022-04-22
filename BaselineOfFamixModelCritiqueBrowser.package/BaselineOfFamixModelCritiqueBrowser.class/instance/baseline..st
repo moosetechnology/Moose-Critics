@@ -5,5 +5,5 @@ baseline: spec
 		for: #common
 		do: [
 			spec
-				package: 'ModelCritiqueBrowser'
+				package: 'MooseIDE-CriticBrowser'
 			]
