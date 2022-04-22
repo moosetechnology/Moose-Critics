@@ -14,5 +14,5 @@ Metacello new
 # Launch the Browser
 In a playground:
 ```Smalltalk
-SpModelCritiqueBrowserPresenter new open
+MiCriticBrowserPresenter open
 ```
