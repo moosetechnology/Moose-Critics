@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"critiques",
-		"invalidEntities",
+		"entities",
+		"queryResult",
 		"textArea"
 	],
 	"name" : "MiCriticBrowserPresenter",

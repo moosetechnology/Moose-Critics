@@ -4,10 +4,10 @@ defaultLayout
 	^ SpPanedLayout newTopToBottom
 	add: (SpPanedLayout newLeftToRight 
 			add: (SpBoxLayout newTopToBottom
-					add: critiques;
+					add: entities;
 					yourself);
 			add: (SpBoxLayout newTopToBottom 
-					add: invalidEntities;
+					add: queryResult;
 					yourself);
 			yourself);
 	add: textArea;

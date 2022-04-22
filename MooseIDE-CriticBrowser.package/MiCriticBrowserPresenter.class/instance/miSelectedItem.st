@@ -1,4 +1,4 @@
 accessing
 miSelectedItem 
 
-	^ self model
+	^ self model entities

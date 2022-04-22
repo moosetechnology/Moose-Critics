@@ -3,14 +3,13 @@ initializePresenters
 	
 	super initializePresenters.
 
-	critiques := self newTreeTable.
-	invalidEntities := self newList.
+	entities := self newTreeTable.
+	queryResult := self newList.
 	textArea := self newCode beNotEditable.
 	
-	critiques addColumn: (SpStringTableColumn new title: 'Entities';
-																evaluated: #name ).
-				
-	self focusOrder 
-		add: critiques;
-		add: invalidEntities;
-		add: textArea
+	entities addColumn: (SpStringTableColumn new title: 'Entities';
+																evaluated: #name ); roots: self model entities asOrderedCollection.
+	self focusOrder
+			add: entities;
+			add: queryResult;
+			add: textArea
