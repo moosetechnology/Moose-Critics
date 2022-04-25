@@ -2,4 +2,5 @@ initialization
 initialize 
 
 	super initialize.
-	entities := OrderedCollection empty
+	entities := OrderedCollection empty.
+	queries := OrderedCollection empty 

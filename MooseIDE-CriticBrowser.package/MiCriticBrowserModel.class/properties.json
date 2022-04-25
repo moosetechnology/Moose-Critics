@@ -6,7 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"entities"
+		"entities",
+		"queries"
 	],
 	"name" : "MiCriticBrowserModel",
 	"type" : "normal"
