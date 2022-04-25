@@ -1,4 +1,4 @@
-as yet unclassified
+updating screen
 updateEntitiesList
 
 	entities roots: self model entities asOrderedCollection.
