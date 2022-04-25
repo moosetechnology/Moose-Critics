@@ -10,7 +10,8 @@ initializePresenters
 	textArea := self newCode beNotEditable.
 	
 	runButton label: 'Run';
-				 icon: (self iconNamed: #glamorousPlay).
+				 icon: (self iconNamed: #glamorousPlay);
+				 action: [self model queries: (MiCriticBrowserPharoCodeQuery on: (queryInput text))].
 	
 	entities addColumn: (SpStringTableColumn new title: 'Entities';
 																evaluated: #name ); roots: self model entities asOrderedCollection.
