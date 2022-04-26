@@ -1,5 +1,5 @@
 actions
 followEntity: anEntity
 
-	self model entities: anEntity.
+	self model setEntities: anEntity.
 	self updateEntitiesList

@@ -1,4 +1,4 @@
 accessing
-queries: anObject
+setQueries: anObject
 
 	queries := anObject

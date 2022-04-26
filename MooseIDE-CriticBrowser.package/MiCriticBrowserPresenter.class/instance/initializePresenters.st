@@ -14,9 +14,13 @@ initializePresenters
 				 action: [ self buttonAction ].
 	
 	entities addColumn: (SpStringTableColumn new title: 'Entities';
-																evaluated: #name ); roots: self model entities asOrderedCollection.
+				evaluated: #name ); roots: self model entities asOrderedCollection;
+				activateOnDoubleClick;
+				whenActivatedDo: [ :each | each selectedItem inspect ].
 	
-	queryResult display: [ :each | each name ].
+	queryResult display: [ :each | each name ];
+					activateOnDoubleClick;
+					whenActivatedDo: [ :each | each selectedItem inspect ].
 	
 	self focusOrder
 			add: queryInput;

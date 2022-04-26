@@ -1,4 +1,5 @@
 accessing
 miSelectedItem 
 
-	^ self model entities
+	self model output ifEmpty: [ ^ self model entities ] 
+							ifNotEmpty: [ ^ self model output ]

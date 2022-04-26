@@ -2,6 +2,6 @@ initialization
 initialize 
 
 	super initialize.
-	entities := OrderedCollection empty.
-	queries := OrderedCollection empty.
-	output := OrderedCollection empty
+	entities := MooseGroup new.
+	queries := OrderedCollection new.
+	output := MooseGroup new
