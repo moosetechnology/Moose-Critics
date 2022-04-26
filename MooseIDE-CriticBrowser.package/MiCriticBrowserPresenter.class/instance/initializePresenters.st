@@ -11,10 +11,13 @@ initializePresenters
 	
 	runButton label: 'Run';
 				 icon: (self iconNamed: #glamorousPlay);
-				 action: [self model queries: (MiCriticBrowserPharoCodeQuery on: (queryInput text))].
+				 action: [ self buttonAction ].
 	
 	entities addColumn: (SpStringTableColumn new title: 'Entities';
 																evaluated: #name ); roots: self model entities asOrderedCollection.
+	
+	queryResult display: [ :each | each name ].
+	
 	self focusOrder
 			add: queryInput;
 			add: runButton;
