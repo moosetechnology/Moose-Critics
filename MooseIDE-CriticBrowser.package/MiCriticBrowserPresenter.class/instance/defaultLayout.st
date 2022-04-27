@@ -10,7 +10,7 @@ defaultLayout
 			add: (SpBoxLayout newTopToBottom 
 				add: queryInput;
 				add: (SpBoxLayout newLeftToRight
-					addLast: addButton;
+					addLast: addCodeButton;
 					spacing: 5; 
 					addLast: runButton;
 					yourself) expand: false;

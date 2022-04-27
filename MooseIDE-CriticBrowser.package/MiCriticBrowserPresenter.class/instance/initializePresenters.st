@@ -4,7 +4,7 @@ initializePresenters
 	super initializePresenters.
 
 	queryInput := self newCode.
-	addButton := self newButton.
+	addCodeButton := self newButton.
 	runButton := self newButton.
 	queries := self newTreeTable.
 	queryResult := self newList.
@@ -12,7 +12,7 @@ initializePresenters
 	queryDroplist := self newDropList.
 	inspectButton := self newButton.
 	
-	addButton label: 'Add query';
+	addCodeButton label: 'Add query';
 				 icon: (self iconNamed: #smallAdd);
 				 action: [ self addButtonAction ].
 	

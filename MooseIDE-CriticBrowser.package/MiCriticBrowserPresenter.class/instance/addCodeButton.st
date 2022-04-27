@@ -1,4 +1,4 @@
 accessing - testing
-addButton
+addCodeButton
 "used for testing purposes, do not access outside of tests"
-	^ addButton
+	^ addCodeButton

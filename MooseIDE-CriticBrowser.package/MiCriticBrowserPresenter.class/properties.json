@@ -8,7 +8,8 @@
 	"instvars" : [
 		"queries",
 		"queryInput",
-		"addButton",
+		"addCodeButton",
+		"addQueryButton",
 		"runButton",
 		"queryResult",
 		"textArea",

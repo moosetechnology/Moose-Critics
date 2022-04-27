@@ -1,6 +1,6 @@
 tests
-testAddButtonAction
+testAddCodeButtonAction
 	browser queryInput text: 'entity isDead'.
-	browser addButton performAction.
+	browser addCodeButton performAction.
 	
 	self assert: browser model queries size equals: 1
