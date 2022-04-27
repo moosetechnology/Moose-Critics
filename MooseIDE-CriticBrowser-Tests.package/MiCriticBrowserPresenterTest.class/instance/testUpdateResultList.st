@@ -3,12 +3,7 @@ testUpdateResultList
 
 	| entity |
 	entity := MooseEntity new.
+	browser model setOutput: entity.
 	
-	"propagating the entity for the model to receive it"
-	browser privateReceivingMode: MiFollowMode.
-	self bus globallySelect: entity.
-	
-	browser queryInput text: 'entity isMooseEntity'.
-	browser runButton performAction.
-	
-	self assert: (browser model output size) equals: 1
+	browser updateResultList.
+	self assert: (browser queryResult items size) equals: 1

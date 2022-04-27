@@ -4,17 +4,24 @@ initializePresenters
 	super initializePresenters.
 
 	queryInput := self newCode.
+	addButton := self newButton.
 	runButton := self newButton.
-	entities := self newTreeTable.
+	queries := self newTreeTable.
 	queryResult := self newList.
-	textArea := self newCode beNotEditable.
+	textArea := self newCode beNotEditable. 
+	queryDroplist := self newDropList.
+	inspectButton := self newButton.
+	
+	addButton label: 'Add query';
+				 icon: (self iconNamed: #smallAdd);
+				 action: [ self addButtonAction ].
 	
 	runButton label: 'Run';
 				 icon: (self iconNamed: #glamorousPlay);
-				 action: [ self buttonAction ].
+				 action: [ self runButtonAction ].
 	
-	entities addColumn: (SpStringTableColumn new title: 'Entities';
-				evaluated: #name ); roots: self model entities asOrderedCollection;
+	queries addColumn: (SpStringTableColumn new title: 'Queries';
+				evaluated: #query ); roots: self model queries;
 				activateOnDoubleClick;
 				whenActivatedDo: [ :each | each selectedItem inspect ].
 	
@@ -22,9 +29,18 @@ initializePresenters
 					activateOnDoubleClick;
 					whenActivatedDo: [ :each | each selectedItem inspect ].
 	
+	queryDroplist startWithoutSelection;
+		           items: self fetchQueries.
+	
+	inspectButton 
+		label: 'Inspect model';
+		icon: (self iconNamed: #glamorousInspect);
+		action: [ self model entities inspect ] .		
+	
 	self focusOrder
+			add: inspectButton;
 			add: queryInput;
 			add: runButton;
-			add: entities;
+			add: queries;
 			add: queryResult;
 			add: textArea

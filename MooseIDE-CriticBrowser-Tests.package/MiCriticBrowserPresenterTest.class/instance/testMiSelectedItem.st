@@ -1,19 +1,13 @@
 test
 testMiSelectedItem
 
-	| entity entityStub group |
+	| entity entityStub |
 	entity := MooseEntity new.
 	entityStub := MooseEntity new.
 	entityStub isStub: true.
-	group := MooseGroup new.
-	group add: entity; add: entityStub.
 	
 	"propagating the entity for the model to receive it"
-	browser receiveEntity: group.
+	(browser model) setEntities: entity; setOutput: entityStub.
 	
-	self assertCollection: (browser miSelectedItem) hasSameElements: group.
-	
-	browser queryInput text: 'entity isStub'.
-	browser runButton performAction.
-	
-	self assertCollection: (browser miSelectedItem) hasSameElements: {entityStub}.
+	self assert: browser miSelectedItem size equals: 1.
+	self assert: (browser miSelectedItem at:1) equals: entityStub 
