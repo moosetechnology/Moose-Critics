@@ -2,4 +2,4 @@ initialization
 initialize
 
 	super initialize.
-	application registerConsumer: model for: FQAbstractQuery 
+	application registerConsumer: self for: FQAbstractQuery 

@@ -6,11 +6,14 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"entities",
+		"queries",
 		"queryInput",
+		"addButton",
 		"runButton",
 		"queryResult",
-		"textArea"
+		"textArea",
+		"queryDroplist",
+		"inspectButton"
 	],
 	"name" : "MiCriticBrowserPresenter",
 	"type" : "normal"
