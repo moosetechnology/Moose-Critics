@@ -1,3 +1,3 @@
-initialization
-consume: aQuery
+removing
+remove: aQuery
 	queryDroplist items: self fetchQueries 
