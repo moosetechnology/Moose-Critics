@@ -2,6 +2,6 @@ accessing
 setOutput: aMooseObject
 	
 	output removeAll.
-	(aMooseObject isMooseObject and: (aMooseObject isCollection)) 
+	aMooseObject isCollection
 		ifTrue: [ output := aMooseObject ]
 		ifFalse: [ output add: aMooseObject ].
