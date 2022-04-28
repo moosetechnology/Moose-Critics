@@ -12,6 +12,7 @@ initializePresenters
 	textArea := self newCode beNotEditable. 
 	queryDroplist := self newDropList.
 	inspectButton := self newButton.
+	unselectButton := self newButton.
 	
 	addCodeButton label: 'Add query';
 				 icon: (self iconNamed: #smallAdd);
@@ -40,11 +41,18 @@ initializePresenters
 	inspectButton 
 		label: 'Inspect model';
 		icon: (self iconNamed: #glamorousInspect);
-		action: [ self model entities inspect ] .		
+		action: [ self model entities inspect ].
+	
+	unselectButton
+		label: 'Unselect query';
+		icon: (self iconNamed: #smallUndo);
+		action: [ queries unselectAll. model output isEmpty ifTrue: (self updateResultList: model getCompleteOutput) ].		
 	
 	self focusOrder
 			add: inspectButton;
 			add: queryInput;
+			add: unselectButton;
+			add: addCodeButton;
 			add: runButton;
 			add: queries;
 			add: queryResult;
