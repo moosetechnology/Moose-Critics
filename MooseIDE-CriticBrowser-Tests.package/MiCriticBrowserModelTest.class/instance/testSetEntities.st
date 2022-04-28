@@ -8,9 +8,11 @@ testSetEntities
 	group := MooseGroup new.
 	group add: entityB; add: entityA.
 	
-	model setEntities: group.
+	model setEntities: entityA.
+	self assertCollection: (model entities) includesAll: {entityA}.
+	self assert: model entities class equals: MooseGroup.
 	
-	self assert: (model entities at:1) equals: entityA.
-	self assert: (model entities at:2) equals: entityB.
+	model setEntities: group.
+	self assertCollection: (model entities) includesAll: group.
 	self assert: model entities class equals: group class
 	
