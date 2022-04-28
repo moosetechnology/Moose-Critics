@@ -5,8 +5,9 @@ initializePresenters
 
 	queryInput := self newCode.
 	addCodeButton := self newButton.
+	addQueryButton := self newButton.
 	runButton := self newButton.
-	queries := self newTreeTable.
+	queries := self newTree.
 	queryResult := self newList.
 	textArea := self newCode beNotEditable. 
 	queryDroplist := self newDropList.
@@ -14,18 +15,22 @@ initializePresenters
 	
 	addCodeButton label: 'Add query';
 				 icon: (self iconNamed: #smallAdd);
-				 action: [ self addButtonAction ].
+				 action: [ self addCodeButtonAction ].
+				
+	addQueryButton label: 'Add query';
+				 icon: (self iconNamed: #smallAdd);
+				 action: [ self addQueryButtonAction  ].
 	
 	runButton label: 'Run';
 				 icon: (self iconNamed: #glamorousPlay);
 				 action: [ self runButtonAction ].
 	
-	queries addColumn: (SpStringTableColumn new title: 'Queries';
-				evaluated: #query ); roots: self model queries;
+	queries items: self model queries;
 				activateOnDoubleClick;
 				whenActivatedDo: [ :each | each selectedItem inspect ].
 	
 	queryResult display: [ :each | each name ];
+					sortingBlock: [ :a :b | a name < b name ];
 					activateOnDoubleClick;
 					whenActivatedDo: [ :each | each selectedItem inspect ].
 	

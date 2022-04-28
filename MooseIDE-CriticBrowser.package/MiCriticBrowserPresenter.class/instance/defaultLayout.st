@@ -5,6 +5,7 @@ defaultLayout
 		add: (SpGridLayout new 
 			add: inspectButton at: 1 @ 1;
 			add: queryDroplist at: 3 @ 1;
+			add: addQueryButton at: 3 @ 2;
 			yourself);
 		add: (SpPanedLayout newTopToBottom 
 			add: (SpBoxLayout newTopToBottom 
