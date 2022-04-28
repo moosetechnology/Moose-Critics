@@ -26,8 +26,8 @@ initializePresenters
 				 action: [ self runButtonAction ].
 	
 	queries items: self model queries;
-				activateOnDoubleClick;
-				whenActivatedDo: [ :each | each selectedItem inspect ].
+				display: [ :each | each query ];
+				whenSelectedItemChangedDo: [ :item | self selectedQuery: item ].
 	
 	queryResult display: [ :each | each name ];
 					sortingBlock: [ :a :b | a name < b name ];
