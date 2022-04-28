@@ -14,7 +14,8 @@
 		"queryResult",
 		"textArea",
 		"queryDroplist",
-		"inspectButton"
+		"inspectButton",
+		"unselectButton"
 	],
 	"name" : "MiCriticBrowserPresenter",
 	"type" : "normal"
