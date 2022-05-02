@@ -27,8 +27,9 @@ initializePresenters
 				 action: [ self runButtonAction ].
 	
 	queries items: self model queries;
+				beMultipleSelection;
 				display: [ :each | each query ];
-				whenSelectedItemChangedDo: [ :item | self selectedQuery: item ].
+				whenMultiSelectionChangedDo: [ self selectedQueries ].
 	
 	queryResult display: [ :each | each name ];
 					sortingBlock: [ :a :b | a name < b name ];
