@@ -15,7 +15,9 @@
 		"textArea",
 		"queryDroplist",
 		"inspectButton",
-		"unselectButton"
+		"unselectButton",
+		"changeableBlock",
+		"queryMakerPresenter"
 	],
 	"name" : "MiCriticBrowserPresenter",
 	"type" : "normal"

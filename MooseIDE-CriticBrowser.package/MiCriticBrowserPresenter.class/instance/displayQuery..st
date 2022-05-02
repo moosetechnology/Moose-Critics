@@ -1,4 +1,4 @@
-as yet unclassified
+updating screen
 displayQuery: selectedQuery
 
 	^ (model output includesKey: selectedQuery) 

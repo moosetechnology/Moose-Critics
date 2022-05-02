@@ -1,5 +1,10 @@
 layout
 defaultLayout
+
+	changeableBlock := (SpPanedLayout newLeftToRight 
+					add: queries;
+					add: queryResult;
+					yourself).
 	
 	^ SpBoxLayout newTopToBottom
 		add: (SpGridLayout new 
@@ -18,10 +23,7 @@ defaultLayout
 					yourself) expand: false;
 				yourself);
 			add: (SpPanedLayout newTopToBottom
-				add: (SpPanedLayout newLeftToRight 
-					add: queries;
-					add: queryResult;
-					yourself);
+				add: changeableBlock;
 				add: textArea;
 				yourself);
 			yourself);

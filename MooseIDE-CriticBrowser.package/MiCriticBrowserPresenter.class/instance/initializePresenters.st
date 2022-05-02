@@ -2,6 +2,8 @@ accessing
 initializePresenters
 	
 	super initializePresenters.
+	
+	queryMakerPresenter := self instantiate: MiCriticBrowserQueryMakerPresenter on: model. 
 
 	queryInput := self newCode.
 	addCodeButton := self newButton.
@@ -36,8 +38,7 @@ initializePresenters
 					activateOnDoubleClick;
 					whenActivatedDo: [ :each | each selectedItem inspect ].
 	
-	queryDroplist startWithoutSelection;
-		           items: self fetchQueries.
+	queryDroplist startWithoutSelection.
 	
 	inspectButton 
 		label: 'Inspect model';
