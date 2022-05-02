@@ -28,7 +28,7 @@ initializePresenters
 	
 	queries items: self model queries;
 				beMultipleSelection;
-				display: [ :each | each query ];
+				display: [ :each | self displayQuery: each ];
 				whenMultiSelectionChangedDo: [ self selectedQueries ].
 	
 	queryResult display: [ :each | each name ];
