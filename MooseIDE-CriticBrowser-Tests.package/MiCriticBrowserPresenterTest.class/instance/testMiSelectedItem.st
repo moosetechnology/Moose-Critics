@@ -11,6 +11,7 @@ testMiSelectedItem
 		setEntities: {entity. entityStub}; 
 		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub));
 		runQueries.
+	browser updateResultList: browser model getCompleteOutput.
 		
 	self assert: browser miSelectedItem size equals: 1.
 	self assert: (browser miSelectedItem at:1) equals: entityStub 

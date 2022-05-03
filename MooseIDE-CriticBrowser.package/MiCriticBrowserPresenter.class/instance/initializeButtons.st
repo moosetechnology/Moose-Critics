@@ -4,7 +4,7 @@ initializeButtons
 	openQueryMakerButton := self newButton.
 	runButton := self newButton.
 	
-	openQueryMakerButton label: 'Add queries';
+	openQueryMakerButton label: 'Add rules';
 				 icon: (self iconNamed: #smallAdd);
 				 action: [ self openQueryMakerButtonAction ].
 	

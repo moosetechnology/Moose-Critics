@@ -1,3 +1,3 @@
 accessing
 miSelectedItem 
-	^ self model getCompleteOutput
+	^ self queryResult items

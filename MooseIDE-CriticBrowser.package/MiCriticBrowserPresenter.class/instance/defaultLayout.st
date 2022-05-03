@@ -8,7 +8,7 @@ defaultLayout
 	^ SpBoxLayout newTopToBottom
 		add: (SpPanedLayout newLeftToRight 
 			add: (SpBoxLayout new 
-				add: 'Queries' expand: false;
+				add: 'Rules' expand: false;
 				add: queries;
 				yourself);
 			add: changeableBlock;
