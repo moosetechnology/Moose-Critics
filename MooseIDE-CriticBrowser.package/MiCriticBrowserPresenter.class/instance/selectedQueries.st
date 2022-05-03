@@ -1,5 +1,6 @@
 selected object
 selectedQueries
+"shows in the output list only the entities validating the selected queries (or the complete output if no query is selected)"
 	| entitiesList |
 	entitiesList := MooseGroup new.
 	(queries selectedItems) ifNotEmpty: [  

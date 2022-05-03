@@ -1,6 +1,5 @@
 layout
 defaultLayout
-
 	changeableBlock := (SpPanedLayout newLeftToRight 
 					add: queries;
 					add: queryResult;
