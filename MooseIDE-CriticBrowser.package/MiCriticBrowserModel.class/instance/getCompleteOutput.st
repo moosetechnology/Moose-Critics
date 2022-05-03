@@ -1,4 +1,4 @@
-as yet unclassified
+accessing
 getCompleteOutput
 	| result |
 	result := MooseGroup new.
