@@ -1,3 +1,5 @@
 buttons actions
 closeQueryMakerButtonAction
-	changeableBlock replaceSecond: queryResult
+	changeableBlock removeAll;
+		add: ('Entities requested' asPresenter) expand: false;
+		add: queryResult

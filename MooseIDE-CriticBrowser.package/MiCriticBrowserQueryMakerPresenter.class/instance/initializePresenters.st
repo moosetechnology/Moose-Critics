@@ -29,8 +29,9 @@ initializePresenters
 						yourself); 
 		yourself.
 	
-	queryDroplist items: self fetchQueries;
-					  startWithoutSelection.
+	queryDroplist startWithoutSelection;
+					  items: self fetchQueries;
+					  centered.
 	
 	queriesBrowserPresenter := MiPresenter new 
 		layout: (SpBoxLayout newTopToBottom 

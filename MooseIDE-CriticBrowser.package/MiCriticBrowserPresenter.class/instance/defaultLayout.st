@@ -1,12 +1,18 @@
 layout
 defaultLayout
-	changeableBlock := (SpPanedLayout newLeftToRight 
-					add: queries;
-					add: queryResult;
-					yourself).
+	changeableBlock := (SpBoxLayout new 
+						add: ('Entities requested' asPresenter) expand: false;
+						add: queryResult;
+						yourself).
 	
 	^ SpBoxLayout newTopToBottom
-		add: changeableBlock;
+		add: (SpPanedLayout newLeftToRight 
+			add: (SpBoxLayout new 
+				add: 'Queries' expand: false;
+				add: queries;
+				yourself);
+			add: changeableBlock;
+			yourself);
 		add: (SpBoxLayout newLeftToRight
 				add: inspectButton expand: false;
 				addLast: openQueryMakerButton;
