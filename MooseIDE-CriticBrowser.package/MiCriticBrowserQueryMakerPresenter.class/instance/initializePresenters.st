@@ -18,8 +18,11 @@ initializePresenters
 		icon: (self iconNamed: #smallAdd).
 		
 	closeButton label: 'Close';
-		icon: (self iconNamed: #glamorousClose).
-		
+		icon: (self iconNamed: #glamorousClose);
+		action: [ owner closeQueryMakerButtonAction ].
+	
+	codeInput text: '[ :entity | ]'.
+	
 	codePresenter := MiPresenter new 
 		layout: (SpBoxLayout newTopToBottom 
 						add: codeInput;

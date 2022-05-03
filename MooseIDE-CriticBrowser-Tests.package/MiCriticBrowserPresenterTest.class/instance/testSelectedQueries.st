@@ -7,8 +7,8 @@ testSelectedQueries
 	entity1 isStub: true.
 	group := MooseGroup new.
 	group add: entity1; add: entity2.
-	query1 := (MiCriticBrowserPharoCodeQuery on: 'entity isStub'). 
-	query2 := (MiCriticBrowserPharoCodeQuery on: 'entity isDead').
+	query1 := (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
+	query2 := (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
 	
 	browser model setEntities: group.
 	browser model addQuery: query1; addQuery: query2.

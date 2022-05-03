@@ -1,0 +1,4 @@
+buttons actions
+openQueryMakerButtonAction
+	changeableBlock replaceSecond: queryMakerPresenter.
+	queryMakerPresenter codeButtonAction 

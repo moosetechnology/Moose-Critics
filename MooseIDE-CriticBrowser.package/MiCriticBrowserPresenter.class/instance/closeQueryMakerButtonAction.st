@@ -1,0 +1,3 @@
+buttons actions
+closeQueryMakerButtonAction
+	changeableBlock replaceSecond: queryResult

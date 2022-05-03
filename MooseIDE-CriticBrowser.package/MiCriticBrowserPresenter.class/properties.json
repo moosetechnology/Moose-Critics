@@ -7,15 +7,10 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"queries",
-		"queryInput",
-		"addCodeButton",
-		"addQueryButton",
+		"openQueryMakerButton",
 		"runButton",
 		"queryResult",
-		"textArea",
-		"queryDroplist",
 		"inspectButton",
-		"unselectButton",
 		"changeableBlock",
 		"queryMakerPresenter"
 	],
