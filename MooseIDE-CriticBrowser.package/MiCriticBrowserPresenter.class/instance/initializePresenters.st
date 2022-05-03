@@ -22,7 +22,7 @@ initializePresenters
 	queries items: self model queries;
 				beMultipleSelection;
 				display: [ :each | self displayQuery: each ];
-				whenMultiSelectionChangedDo: [ self selectedQueries ].
+				whenSelectionChangedDo: [ self selectedQueries ].
 	
 	queryResult display: [ :each | each name ];
 					sortingBlock: [ :a :b | a name < b name ];
