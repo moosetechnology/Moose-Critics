@@ -1,4 +1,4 @@
 accessing
 addQuery: aQuery
 
-	(aQuery class superclass = MiCriticBrowserAbstractQuery) ifTrue: [ queries add: aQuery ]
+	(aQuery class inheritsFrom: MiCriticBrowserAbstractQuery) ifTrue: [ queries add: aQuery ]
