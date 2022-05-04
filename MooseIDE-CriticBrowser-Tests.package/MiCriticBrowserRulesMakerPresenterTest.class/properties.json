@@ -6,8 +6,8 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"queryMaker"
+		"rulesMaker"
 	],
-	"name" : "MiCriticBrowserQueryMakerPresenterTest",
+	"name" : "MiCriticBrowserRulesMakerPresenterTest",
 	"type" : "normal"
 }

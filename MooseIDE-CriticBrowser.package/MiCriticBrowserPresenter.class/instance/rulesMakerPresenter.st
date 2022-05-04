@@ -1,4 +1,4 @@
 accessing - testing
-queryMakerPresenter
+rulesMakerPresenter
 "used for testing purposes, do not access outside of tests"
-	^ queryMakerPresenter
+	^ rulesMakerPresenter

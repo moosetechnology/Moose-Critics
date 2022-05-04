@@ -1,4 +1,4 @@
 window control
 browserClosed
 	super browserClosed.
-	self application unregisterConsumer: queryMakerPresenter 
+	self application unregisterConsumer: rulesMakerPresenter 

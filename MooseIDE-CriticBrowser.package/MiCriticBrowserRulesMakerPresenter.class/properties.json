@@ -17,6 +17,6 @@
 		"closeButton",
 		"mainWindow"
 	],
-	"name" : "MiCriticBrowserQueryMakerPresenter",
+	"name" : "MiCriticBrowserRulesMakerPresenter",
 	"type" : "normal"
 }

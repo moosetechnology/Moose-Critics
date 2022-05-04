@@ -5,12 +5,12 @@ initializePresenters
 	self initializeLists.
 	self initializeButtons.
 	
-	queryMakerPresenter := self instantiate: MiCriticBrowserQueryMakerPresenter on: model.
-	queryMakerPresenter mainWindow: self.
+	rulesMakerPresenter := self instantiate: MiCriticBrowserRulesMakerPresenter on: model.
+	rulesMakerPresenter mainWindow: self.
 	
 	self focusOrder
 			add: queries;
 			add: queryResult;
 			add: inspectButton;
-			add: openQueryMakerButton;
+			add: openRulesMakerButton;
 			add: runButton.

@@ -1,12 +1,12 @@
 initialization
 initializeButtons
 	inspectButton := self newButton.
-	openQueryMakerButton := self newButton.
+	openRulesMakerButton := self newButton.
 	runButton := self newButton.
 	
-	openQueryMakerButton label: 'Add rules';
+	openRulesMakerButton label: 'Add rules';
 				 icon: (self iconNamed: #smallAdd);
-				 action: [ self openQueryMakerButtonAction ].
+				 action: [ rulesMakerPresenter openDialog ].
 	
 	runButton label: 'Run';
 				 icon: (self iconNamed: #glamorousPlay);
