@@ -1,3 +1,3 @@
 accessing
 miSelectedItem 
-	^ self queryResult roots flatten
+	^ self queryResult roots flatten asMooseGroup

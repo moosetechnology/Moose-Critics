@@ -8,4 +8,5 @@ updateResultList: aCollection
 		(roots sort: [ :group | group description onlyLetters ] ascending).
 	
 	queryResult roots: roots.
-	queryResult refresh
+	queryResult refresh.
+	self updateToolbar
