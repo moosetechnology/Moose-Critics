@@ -5,6 +5,6 @@ queriesBrowserButtonAction
 		add: queriesBrowserPresenter.
 	addButton action: [ 
 		queryDroplist selectedItem ifNotNil: 
-		[ owner model addQuery: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem)) ].
-		owner updateQueriesList 
+		[ mainWindow model addQuery: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem)) ].
+		mainWindow updateQueriesList 
 	]

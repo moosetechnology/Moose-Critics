@@ -6,6 +6,7 @@ initializePresenters
 	self initializeButtons.
 	
 	queryMakerPresenter := self instantiate: MiCriticBrowserQueryMakerPresenter on: model.
+	queryMakerPresenter mainWindow: self.
 	
 	self focusOrder
 			add: queries;

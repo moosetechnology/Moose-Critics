@@ -1,7 +1,4 @@
 buttons actions
 openQueryMakerButtonAction
-	changeableBlock
-		removeAll;
-		add: ('Query maker' asPresenter) expand: false; 
-		add: queryMakerPresenter.
-	queryMakerPresenter codeButtonAction 
+"opens the query maker as a dialog window"
+	queryMakerPresenter openDialog

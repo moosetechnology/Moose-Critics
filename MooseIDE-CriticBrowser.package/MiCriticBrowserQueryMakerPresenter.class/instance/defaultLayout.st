@@ -1,17 +1,11 @@
 layout
 defaultLayout
 	
-	| choiceBar actionBar |
+	| choiceBar |
 	
 	choiceBar := SpBoxLayout newLeftToRight 
 		add: codeButton;
 		add: queriesBrowserButton;
-		beHomogeneous;
-		yourself.
-		
-	actionBar := SpBoxLayout newLeftToRight 
-		add: closeButton;
-		add: addButton;
 		beHomogeneous;
 		yourself.
 	
@@ -22,6 +16,5 @@ defaultLayout
 	^ SpBoxLayout newTopToBottom
 		add: choiceBar expand: false;
 		add: changeableBlock;
-		add: actionBar expand: false;
 		yourself
 		

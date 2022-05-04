@@ -14,7 +14,8 @@
 		"addButton",
 		"queryDroplist",
 		"changeableBlock",
-		"closeButton"
+		"closeButton",
+		"mainWindow"
 	],
 	"name" : "MiCriticBrowserQueryMakerPresenter",
 	"type" : "normal"

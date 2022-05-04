@@ -1,25 +1,30 @@
 initialization
 initializePresenters
 
-	codeButton := self newButton.
-	queriesBrowserButton := self newButton.
+	codeButton := self newRadioButton.
+	queriesBrowserButton := self newRadioButton.
 	codeInput := self newCode.
 	queryDroplist := self newDropList.
 	addButton := self newButton.
 	closeButton := self newButton.
 	
 	codeButton label: 'Pharo Code';
-		action: [ self codeButtonAction ].
+		whenActivatedDo: [ self codeButtonAction ];
+		associatedRadioButtons: { queriesBrowserButton }.
 	
 	queriesBrowserButton label: 'Queries Browser';
-		action: [ self queriesBrowserButtonAction ].
+		whenActivatedDo: [ self queriesBrowserButtonAction ].
 	
 	addButton label: 'Add query';
-		icon: (self iconNamed: #smallAdd).
+		icon: (self iconNamed: #smallAdd);
+		action: [ codeInput text ifNotNil: 
+		[ mainWindow model addQuery: (MiCriticBrowserPharoCodeQuery on: (codeInput text)) ].
+		codeInput text: '[ :entity | ]'.
+		mainWindow updateQueriesList ].
 		
 	closeButton label: 'Close';
 		icon: (self iconNamed: #glamorousClose);
-		action: [ owner closeQueryMakerButtonAction ].
+		action: [ self delete ].
 	
 	codeInput text: '[ :entity | ]'.
 	
