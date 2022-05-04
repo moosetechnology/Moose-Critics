@@ -4,13 +4,15 @@ initializeButtons
 	openRulesMakerButton := self newButton.
 	runButton := self newButton.
 	
-	openRulesMakerButton label: 'Add rules';
-				 icon: (self iconNamed: #smallAdd);
-				 action: [ rulesMakerPresenter openDialog ].
+	openRulesMakerButton
+		label: 'Add rules';
+		icon: (self iconNamed: #smallAdd);
+		action: [ rulesMakerPresenter openDialog ].
 	
-	runButton label: 'Run';
-				 icon: (self iconNamed: #glamorousPlay);
-				 action: [ self runButtonAction ].
+	runButton 
+		label: 'Run';
+		icon: (self iconNamed: #glamorousPlay);
+		action: [ self runButtonAction ].
 	
 	inspectButton 
 		label: 'Inspect model';
