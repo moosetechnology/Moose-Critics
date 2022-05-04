@@ -6,6 +6,7 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
+		"entitiesList",
 		"queries",
 		"runButton",
 		"queryResult",
