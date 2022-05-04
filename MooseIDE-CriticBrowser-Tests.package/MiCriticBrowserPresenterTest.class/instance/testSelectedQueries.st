@@ -17,10 +17,10 @@ testSelectedQueries
 	browser updateResultList: browser model getCompleteOutput.
 	
 	browser queries selectItem: query1.
-	self assert: browser queryResult items size equals: 1.
-	self assert: browser queryResult items anyOne equals: entity1.
+	self assert: browser queryResult roots flatten size equals: 1.
+	self assert: browser queryResult roots flatten anyOne equals: entity1.
 	
 	browser queries selectItem: query2.
-	self assert: browser queryResult items size equals: 2.
-	self assertCollection: browser queryResult items includesAll: group.
+	self assert: browser queryResult roots flatten size equals: 2.
+	self assertCollection: browser queryResult roots flatten includesAll: group.
 	

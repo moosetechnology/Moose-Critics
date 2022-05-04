@@ -1,7 +1,7 @@
 initialization
 initializeLists
 	queries := self newTree.
-	queryResult := self newList.
+	queryResult := self newTree.
 	
 	queries
 		items: self model queries;
@@ -10,7 +10,10 @@ initializeLists
 		whenSelectionChangedDo: [ self selectedQueries ].
 	
 	queryResult
-		display: [ :each | each name ];
-		sortingBlock: [ :a :b | a name < b name ];
+		display: [ :each | self stringForItem: each ];
+		children: 
+			[ :each | (queryResult roots includes: each) 
+				ifTrue: [ (queryResult roots at: (queryResult roots indexOf: each)) asCollection ] 
+				ifFalse: [ {  } ] ];
 		activateOnDoubleClick;
 		whenActivatedDo: [ :each | each selectedItem inspect ]

@@ -2,13 +2,14 @@ test
 testMiSelectedItem
 
 	| entity entityStub |
-	entity := MooseEntity new.
-	entityStub := MooseEntity new.
+	entity := FamixStMethod new.
+	entityStub := FamixStMethod new.
+	entity name: 'test'. entityStub name: 'test'.
 	entityStub isStub: true.
 	
 	"propagating the entity for the model to receive it"
 	(browser model) 
-		setEntities: {entity. entityStub}; 
+		setEntities: {entity. entityStub} asMooseGroup; 
 		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub));
 		runQueries.
 	browser updateResultList: browser model getCompleteOutput.

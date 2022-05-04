@@ -2,11 +2,12 @@ test
 testUpdateResultList
 
 	| entity |
-	entity := MooseEntity new.
+	entity := FamixStMethod new.
+	entity name: 'test'; isStub: true.
 	browser model 
 		setEntities: entity;
-		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead));
+		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub));
 		runQueries.
 	
-	browser updateResultList: browser model output.
-	self assert: (browser queryResult items size) equals: 1
+	browser updateResultList: browser model getCompleteOutput.
+	self assert: (browser queryResult roots flatten size) equals: 1

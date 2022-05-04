@@ -16,4 +16,4 @@ testUnselectPrintsCompleteOutput
 	
 	browser queries selectItem: query1.
 	browser queries unselectAll.
-	self assert: (browser queryResult items size) equals: 2
+	self assert: (browser queryResult roots flatten size) equals: 2

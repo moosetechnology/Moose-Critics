@@ -1,3 +1,3 @@
 accessing
 miSelectedItem 
-	^ self queryResult items
+	^ self queryResult roots flatten
