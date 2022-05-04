@@ -7,13 +7,10 @@ initializeLists
 		items: self model queries;
 		beMultipleSelection;
 		display: [ :each | self displayQuery: each ];
-		whenSelectionChangedDo: [ self selectedQueries ].
+		whenSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
 	
 	queryResult
 		display: [ :each | self stringForItem: each ];
-		children: 
-			[ :each | (queryResult roots includes: each) 
-				ifTrue: [ (queryResult roots at: (queryResult roots indexOf: each)) asCollection ] 
-				ifFalse: [ {  } ] ];
+		children: [ :each | self children: each for: queryResult ];
 		activateOnDoubleClick;
 		whenActivatedDo: [ :each | each selectedItem inspect ]

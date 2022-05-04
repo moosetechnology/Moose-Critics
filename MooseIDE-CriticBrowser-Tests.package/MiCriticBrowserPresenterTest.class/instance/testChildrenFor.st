@@ -1,5 +1,5 @@
 test
-testUpdateResultList
+testChildrenFor
 	| entity |
 	entity := FamixStMethod new.
 	entity name: 'test'; isStub: true.
@@ -9,4 +9,4 @@ testUpdateResultList
 		runQueries.
 	
 	browser updateResultList: browser model getCompleteOutput.
-	self assert: (browser queryResult roots flatten size) equals: 1
+	self assertCollection: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) includesAll: { entity }
