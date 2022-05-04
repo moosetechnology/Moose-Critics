@@ -6,7 +6,9 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"query"
+		"query",
+		"name",
+		"summary"
 	],
 	"name" : "MiCriticBrowserAbstractQuery",
 	"type" : "normal"
