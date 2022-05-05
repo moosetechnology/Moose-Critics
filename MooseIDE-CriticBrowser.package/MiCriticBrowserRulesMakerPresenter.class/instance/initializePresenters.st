@@ -3,6 +3,7 @@ initializePresenters
 
 	codeButton := self newRadioButton.
 	queriesBrowserButton := self newRadioButton.
+	ruleTitle := self newTextInput.
 	codeInput := self newCode.
 	queryDroplist := self newDropList.
 	addButton := self newButton.
@@ -18,7 +19,8 @@ initializePresenters
 	addButton label: 'Add query';
 		icon: (self iconNamed: #smallAdd);
 		action: [ codeInput text ifNotNil: 
-		[ mainWindow model addQuery: (MiCriticBrowserPharoCodeQuery on: (codeInput text)) ].
+		[ mainWindow model addQuery: ((MiCriticBrowserPharoCodeQuery on: (codeInput text)) name: (ruleTitle text); yourself) ].
+		ruleTitle text: ''.
 		codeInput text: '[ :entity | ]'.
 		mainWindow updateQueriesList ].
 		

@@ -15,7 +15,8 @@
 		"queryDroplist",
 		"changeableBlock",
 		"closeButton",
-		"mainWindow"
+		"mainWindow",
+		"ruleTitle"
 	],
 	"name" : "MiCriticBrowserRulesMakerPresenter",
 	"type" : "normal"
