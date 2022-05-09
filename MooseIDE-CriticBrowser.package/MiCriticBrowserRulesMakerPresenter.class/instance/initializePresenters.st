@@ -22,7 +22,7 @@ initializePresenters
 		
 	closeButton label: 'Close';
 		icon: (self iconNamed: #glamorousClose);
-		action: [ self delete ].
+		action: [ self window close ].
 	
 	codeInput text: '[ :entity | ]'.
 	
