@@ -18,11 +18,7 @@ initializePresenters
 	
 	addButton label: 'Add query';
 		icon: (self iconNamed: #smallAdd);
-		action: [ codeInput text ifNotNil: 
-		[ mainWindow model addQuery: ((MiCriticBrowserPharoCodeQuery on: (codeInput text)) name: (ruleTitle text); yourself) ].
-		ruleTitle text: ''.
-		codeInput text: '[ :entity | ]'.
-		mainWindow updateQueriesList ].
+		action: [ self addButtonAction ].
 		
 	closeButton label: 'Close';
 		icon: (self iconNamed: #glamorousClose);
@@ -44,4 +40,4 @@ initializePresenters
 		layout: (SpBoxLayout newTopToBottom 
 						add: queryDroplist expand: false; 
 						yourself);
-		yourself.
+		yourself
