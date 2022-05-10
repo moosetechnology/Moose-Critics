@@ -1,0 +1,15 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MooseIDE-CriticBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"name",
+		"summary",
+		"query"
+	],
+	"name" : "MiCBRule",
+	"type" : "normal"
+}

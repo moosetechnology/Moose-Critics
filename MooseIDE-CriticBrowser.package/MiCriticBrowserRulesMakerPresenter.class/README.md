@@ -1,0 +1,1 @@
+Class implementing the presenter used to input queries, can use Pharo code or queries produced by the Queries Browser.

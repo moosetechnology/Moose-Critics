@@ -1,0 +1,1 @@
+I am NotAValidQuery, an error raised when a Rule is instantiated with a query not inheriting from the class MiCriticBrowserAbstractQuery.

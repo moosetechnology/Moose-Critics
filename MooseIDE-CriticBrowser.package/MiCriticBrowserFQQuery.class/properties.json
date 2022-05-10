@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "MiCriticBrowserAbstractQuery",
+	"category" : "MooseIDE-CriticBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "MiCriticBrowserFQQuery",
+	"type" : "normal"
+}

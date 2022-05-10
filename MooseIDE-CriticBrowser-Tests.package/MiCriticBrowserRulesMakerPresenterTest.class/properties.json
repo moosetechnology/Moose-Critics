@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "<historical>",
+	"super" : "MiAbstractBrowserTest",
+	"category" : "MooseIDE-CriticBrowser-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rulesMaker"
+	],
+	"name" : "MiCriticBrowserRulesMakerPresenterTest",
+	"type" : "normal"
+}
