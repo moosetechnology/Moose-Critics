@@ -1,5 +1,5 @@
-test
-testGetCompleteOutput
+tests
+testRunRules
 	| entity1 entity2 rule1 rule2 group |
 	entity1 := FamixStMethod new.
 	entity2 := FamixStMethod new.
@@ -9,9 +9,9 @@ testGetCompleteOutput
 	rule1 := MiCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
 	rule2 := MiCBRule named: 'test2' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
 	
-	model setEntities: group.
-	model addRule: rule1; addRule: rule2.
+	model setEntities: group; addRule: rule1; addRule: rule2.
 	model runRules.
-	self assert: model getCompleteOutput class equals: MooseGroup.
-	self assertCollection: model getCompleteOutput includesAll: group  
+	self assert: model output size equals: 2.
+	self assertCollection: (model output at: rule1) includesAll: {entity1}.
+	self assertCollection: (model output at: rule2) includesAll: group.
 	

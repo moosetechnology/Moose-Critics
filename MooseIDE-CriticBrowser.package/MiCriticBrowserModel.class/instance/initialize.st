@@ -3,5 +3,5 @@ initialize
 
 	super initialize.
 	entities := MooseGroup new.
-	queries := OrderedCollection new.
+	rules := OrderedCollection new.
 	output := Dictionary new.
