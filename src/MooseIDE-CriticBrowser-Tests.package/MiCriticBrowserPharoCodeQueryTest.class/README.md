@@ -1,0 +1,1 @@
+A MiCriticBrowserCodeQueryTest is a test class for testing the behavior of MiCriticBrowserCodeQuery

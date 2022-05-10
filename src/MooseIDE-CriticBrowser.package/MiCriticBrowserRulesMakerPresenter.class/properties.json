@@ -1,0 +1,23 @@
+{
+	"commentStamp" : "RomainDegrave 5/2/2022 15:34",
+	"super" : "MiPresenter",
+	"category" : "MooseIDE-CriticBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"codeButton",
+		"queriesBrowserButton",
+		"codePresenter",
+		"codeInput",
+		"queriesBrowserPresenter",
+		"addButton",
+		"queryDroplist",
+		"changeableBlock",
+		"closeButton",
+		"mainWindow",
+		"ruleTitle"
+	],
+	"name" : "MiCriticBrowserRulesMakerPresenter",
+	"type" : "normal"
+}
