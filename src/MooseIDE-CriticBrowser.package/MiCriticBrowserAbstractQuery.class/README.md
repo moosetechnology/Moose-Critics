@@ -1,1 +1,0 @@
-An abstract class to represent the query side of the model critic browser.
