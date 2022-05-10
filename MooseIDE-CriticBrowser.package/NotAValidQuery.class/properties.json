@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "RomainDegrave 5/10/2022 11:24",
+	"super" : "Error",
+	"category" : "MooseIDE-CriticBrowser",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "NotAValidQuery",
+	"type" : "normal"
+}
