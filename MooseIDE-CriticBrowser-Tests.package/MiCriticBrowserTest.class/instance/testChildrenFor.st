@@ -5,8 +5,8 @@ testChildrenFor
 	entity name: 'test'; isStub: true.
 	browser model 
 		setEntities: entity;
-		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub));
-		runQueries.
+		addRule: (MiCBRule named: 'test' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub)));
+		runRules.
 	
 	browser updateResultList: browser model getCompleteOutput.
 	self assertCollection: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) includesAll: { entity }

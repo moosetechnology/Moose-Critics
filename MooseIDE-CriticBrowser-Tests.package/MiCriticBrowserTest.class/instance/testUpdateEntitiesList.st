@@ -1,10 +1,6 @@
 test
 testUpdateEntitiesList
-	| entity |
-	entity := FamixStMethod new.
-	entity name: 'test'; isStub: true.
-	browser model 
-		setEntities: entity.
+	browser model setEntities: stubEntity.
 	
 	browser updateEntitiesList.
 	self assert: (browser entitiesList roots flatten size) equals: 1

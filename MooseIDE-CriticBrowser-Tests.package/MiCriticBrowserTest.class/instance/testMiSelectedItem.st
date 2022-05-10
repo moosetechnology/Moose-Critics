@@ -10,8 +10,8 @@ testMiSelectedItem
 	"propagating the entity for the model to receive it"
 	(browser model) 
 		setEntities: {entity. entityStub} asMooseGroup; 
-		addQuery: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub));
-		runQueries.
+		addRule: (MiCBRule named: 'test' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub)));
+		runRules.
 	browser updateResultList: browser model getCompleteOutput.
 		
 	self assert: browser miSelectedItem size equals: 1.

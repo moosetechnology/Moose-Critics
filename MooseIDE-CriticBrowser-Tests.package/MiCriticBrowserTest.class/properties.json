@@ -5,7 +5,12 @@
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
-	"instvars" : [ ],
-	"name" : "MiCriticBrowserPresenterTest",
+	"instvars" : [
+		"stubRule",
+		"deadRule",
+		"basicEntity",
+		"stubEntity"
+	],
+	"name" : "MiCriticBrowserTest",
 	"type" : "normal"
 }

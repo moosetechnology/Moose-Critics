@@ -1,4 +1,4 @@
 adding
 addInputtedFQRule
 	queryDroplist selectedItem ifNotNil: 
-		[ mainWindow model addQuery: ((MiCriticBrowserFQQuery on: (queryDroplist selectedItem)) name: (ruleTitle text); yourself) ]
+		[ mainWindow model addRule: (MiCBRule named: (ruleTitle text) on: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem))) ]

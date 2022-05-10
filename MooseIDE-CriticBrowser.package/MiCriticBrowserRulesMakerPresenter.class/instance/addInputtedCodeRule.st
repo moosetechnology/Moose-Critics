@@ -1,5 +1,5 @@
 adding
 addInputtedCodeRule
 	codeInput text ifNotNil: 
-		[ mainWindow model addQuery: ((MiCriticBrowserPharoCodeQuery on: (codeInput text)) name: (ruleTitle text); yourself) ].
+		[ mainWindow model addRule: (MiCBRule named: (ruleTitle text) on: (MiCriticBrowserPharoCodeQuery on: (codeInput text))) ].
 	codeInput text: '[ :entity | ]'
