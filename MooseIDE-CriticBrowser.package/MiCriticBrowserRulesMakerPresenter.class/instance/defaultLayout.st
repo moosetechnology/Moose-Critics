@@ -1,7 +1,7 @@
 layout
 defaultLayout
 	
-	| choiceBar titlePane |
+	| choiceBar titlePane summaryPane |
 	
 	choiceBar := SpBoxLayout newLeftToRight 
 		add: codeButton;
@@ -17,12 +17,18 @@ defaultLayout
 	changeableBlock := SpBoxLayout newTopToBottom 
 		add: ('Input for code query :' asPresenter) expand: false; 
 		add: codePresenter;
-	yourself.
+		yourself.
+		
+	summaryPane := SpBoxLayout newTopToBottom
+		add: ('Summary of the rule :' asPresenter) expand: false;
+		add: ruleSummary expand: true;
+		yourself.
 	
 	^ SpBoxLayout newTopToBottom
 		add: choiceBar expand: false;
 		spacing: 5;
 		add: titlePane expand: false;
 		add: changeableBlock;
+		add: summaryPane;
 		yourself
 		

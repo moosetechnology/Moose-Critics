@@ -16,7 +16,8 @@
 		"changeableBlock",
 		"closeButton",
 		"mainWindow",
-		"ruleTitle"
+		"ruleTitle",
+		"ruleSummary"
 	],
 	"name" : "MiCriticBrowserRulesMakerPresenter",
 	"type" : "normal"
