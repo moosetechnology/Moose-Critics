@@ -45,7 +45,7 @@ MiCriticBrowser >> canFollowEntity: anEntity [
 	^ anEntity isMooseObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #api }
 MiCriticBrowser >> children: aCollection for: aTreePresenter [
 "provides content of the children block for the collection root for a given tree presenter"
 	^ (aTreePresenter roots includes: aCollection) 
@@ -86,7 +86,7 @@ MiCriticBrowser >> defaultTitle [
 	^ 'Model Critic Browser'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #deleting }
 MiCriticBrowser >> deleteSelectedRule [
 	queries selectedItems do: [ :rule | model deleteRule: rule ] 
 ]
