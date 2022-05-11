@@ -18,7 +18,7 @@ Class {
 		'ruleTitle',
 		'ruleSummary'
 	],
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
 
 { #category : #'accessing - tests' }
@@ -39,14 +39,24 @@ MiCriticBrowserRulesMakerPresenter >> addButtonAction [
 { #category : #adding }
 MiCriticBrowserRulesMakerPresenter >> addInputtedCodeRule [
 	codeInput text ifNotNil: 
-		[ mainWindow model addRule: (MiCBRule named: (ruleTitle text) on: (MiCriticBrowserPharoCodeQuery on: (codeInput text))) ].
+		[ 
+		mainWindow model addRule: 
+			(MiCBRule named: (ruleTitle text) 
+							on: (MiCriticBrowserPharoCodeQuery on: (codeInput text))
+							summary: ruleSummary text) 
+		].
 	codeInput text: '[ :entity | ]'
 ]
 
 { #category : #adding }
 MiCriticBrowserRulesMakerPresenter >> addInputtedFQRule [
 	queryDroplist selectedItem ifNotNil: 
-		[ mainWindow model addRule: (MiCBRule named: (ruleTitle text) on: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem))) ]
+		[ 
+		mainWindow model addRule: 
+			(MiCBRule named: (ruleTitle text) 
+							on: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem))
+							summary: ruleSummary text) 
+		]
 ]
 
 { #category : #'buttons actions' }
@@ -204,8 +214,7 @@ MiCriticBrowserRulesMakerPresenter >> queriesBrowserButtonAction [
 	changeableBlock 
 		removeAll; 
 		add: ('Choose a query :' asPresenter) expand: false;
-		add: queriesBrowserPresenter;
-		expand: false.
+		add: queriesBrowserPresenter.
 	codeInput hide. queryDroplist show.
 ]
 

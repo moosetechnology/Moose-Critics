@@ -7,13 +7,14 @@ Class {
 	#instVars : [
 		'entitiesList',
 		'queries',
+		'editMenu',
 		'runButton',
 		'queryResult',
 		'inspectButton',
 		'rulesMakerPresenter',
 		'openRulesMakerButton'
 	],
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
 
 { #category : #'instance creation' }
@@ -148,8 +149,8 @@ MiCriticBrowser >> initializeLists [
 	
 	queries
 		items: self model rules;
-		beMultipleSelection;
 		display: [ :each | self displayQuery: each ];
+		beMultipleSelection;
 		whenSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
 	
 	queryResult

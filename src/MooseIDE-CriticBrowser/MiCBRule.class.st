@@ -17,6 +17,15 @@ MiCBRule class >> named: aString on: aQuery [
 		yourself
 ]
 
+{ #category : #'instance creation' }
+MiCBRule class >> named: aString on: aQuery summary: aSummary [
+	^ self new
+		name: aString;
+		query: aQuery;
+		summary: aSummary;
+		yourself
+]
+
 { #category : #accessing }
 MiCBRule >> name [
 
