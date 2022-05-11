@@ -6,7 +6,7 @@ Class {
 		'summary',
 		'query'
 	],
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
 
 { #category : #'instance creation' }
@@ -54,7 +54,8 @@ MiCBRule >> query: aQuery [
 
 { #category : #running }
 MiCBRule >> runOn: aCollection [
-	^ self query runOnCollection: aCollection
+	^ ((self query runOnCollection: aCollection) collect: 
+		[ :each | (MiCBViolation rule: self violatedBy: each) ]) asMooseGroup specialize.
 ]
 
 { #category : #accessing }

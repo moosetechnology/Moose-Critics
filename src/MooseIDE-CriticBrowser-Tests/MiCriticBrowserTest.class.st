@@ -49,7 +49,7 @@ MiCriticBrowserTest >> testChildrenFor [
 		runRules.
 	
 	browser updateResultList: browser model getCompleteOutput.
-	self assertCollection: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) includesAll: { entity }
+	self assert: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) anyOne violatingEntity equals: entity
 ]
 
 { #category : #test }
@@ -93,7 +93,7 @@ MiCriticBrowserTest >> testMiSelectedItem [
 	browser updateResultList: browser model getCompleteOutput.
 		
 	self assert: browser miSelectedItem size equals: 1.
-	self assert: (browser miSelectedItem at:1) equals: entityStub 
+	self assert: (browser miSelectedItem anyOne violatingEntity) equals: entityStub 
 ]
 
 { #category : #tests }
@@ -122,11 +122,12 @@ MiCriticBrowserTest >> testSelectedQueries [
 	
 	browser queries selectItem: stubRule.
 	self assert: browser queryResult roots flatten size equals: 1.
-	self assert: browser queryResult roots flatten anyOne equals: stubEntity.
+	self assert: browser queryResult roots flatten anyOne violatingEntity equals: stubEntity.
 	
+	browser queries unselectItem: stubRule.
 	browser queries selectItem: deadRule.
 	self assert: browser queryResult roots flatten size equals: 2.
-	self assertCollection: browser queryResult roots flatten includesAll: { stubEntity. basicEntity }.
+	self assertCollection: browser queryResult roots flatten asMooseGroup specialize allEntities includesAll: { stubEntity. basicEntity }.
 	
 ]
 
@@ -138,7 +139,7 @@ MiCriticBrowserTest >> testUnselectPrintsCompleteOutput [
 	
 	browser queries selectItem: stubRule.
 	browser queries unselectAll.
-	self assert: (browser queryResult roots flatten size) equals: 2
+	self assert: (browser queryResult roots flatten size) equals: 3
 
 ]
 

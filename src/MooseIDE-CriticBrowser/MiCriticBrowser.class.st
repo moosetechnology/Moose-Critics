@@ -206,7 +206,9 @@ MiCriticBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #accessing }
 MiCriticBrowser >> miSelectedItem [ 
-	^ self queryResult roots flatten asMooseGroup
+	^ self queries selectedItems 
+		ifEmpty: [ model getCompleteOutput ] 
+		ifNotEmpty: [ model outputOfCollection: (self queries selectedItems) ]
 ]
 
 { #category : #'accessing - testing' }
@@ -250,13 +252,9 @@ MiCriticBrowser >> runButtonAction [
 { #category : #'selected object' }
 MiCriticBrowser >> selectedQueries [
 "shows in the output list only the entities validating the selected queries (or the complete output if no query is selected)"
-	| entities |
-	entities := MooseGroup new.
 	(queries selectedItems) 
 		ifNotEmpty: [
-			(queries selectedItems) do: 
-				[ :each | entities := entities | (model output at: each) ].
-			self updateResultList: entities ]
+			self updateResultList: (model outputOfCollection: (queries selectedItems)) ]
 		ifEmpty: [ 
 			self updateResultList: model getCompleteOutput ]
 ]
@@ -295,7 +293,6 @@ MiCriticBrowser >> updateResultList: aCollection [
 	roots do: [ :group | group description: group details ].
 	queryResult roots:
 		(roots sort: [ :group | group description onlyLetters ] ascending).
-	
 	queryResult roots: roots.
 	queryResult refresh.
 	self updateToolbar

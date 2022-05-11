@@ -34,8 +34,8 @@ MiCriticBrowserModel >> entities [
 { #category : #accessing }
 MiCriticBrowserModel >> getCompleteOutput [
 	| result |
-	result := MooseGroup new.
-	output do: [ :each | result := result | each ].
+	result := MiCBViolationGroup new.
+	output do: [ :each | result := result , each ].
 	^ result
 ]
 
@@ -52,6 +52,20 @@ MiCriticBrowserModel >> initialize [
 MiCriticBrowserModel >> output [
 
 	^ output
+]
+
+{ #category : #accessing }
+MiCriticBrowserModel >> outputOf: aMiCBRule [
+	(output includesKey: aMiCBRule)
+		ifTrue: [ ^ self output at: aMiCBRule ]
+]
+
+{ #category : #accessing }
+MiCriticBrowserModel >> outputOfCollection: aCollection [
+	| result |
+	result := MiCBViolationGroup new.
+	aCollection do: [ :rule | result := result , (self outputOf: rule) ].
+	^ result 
 ]
 
 { #category : #accessing }

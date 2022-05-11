@@ -12,6 +12,12 @@ Class {
 	#category : #'MooseIDE-CriticBrowser'
 }
 
+{ #category : #'as yet unclassified' }
+MiCBViolation class >> annotationMiCBViolationGroup [
+	<mooseGroup>
+	^ MiCBViolationGroup 
+]
+
 { #category : #initialization }
 MiCBViolation class >> rule: aMiCBRule violatedBy: anEntity [
 	^ self new 
