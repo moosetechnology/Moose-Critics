@@ -86,6 +86,11 @@ MiCriticBrowser >> defaultTitle [
 	^ 'Model Critic Browser'
 ]
 
+{ #category : #'as yet unclassified' }
+MiCriticBrowser >> deleteSelectedRule [
+	queries selectedItems do: [ :rule | model deleteRule: rule ] 
+]
+
 { #category : #'updating screen' }
 MiCriticBrowser >> displayQuery: selectedQuery [
 "displays the queries, adding the number of entities they get if the query has been executed"
@@ -150,6 +155,7 @@ MiCriticBrowser >> initializeLists [
 	queries
 		items: self model rules;
 		display: [ :each | self displayQuery: each ];
+		contextMenu: editMenu;
 		beMultipleSelection;
 		whenSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
 	
@@ -162,12 +168,20 @@ MiCriticBrowser >> initializeLists [
 
 { #category : #initialization }
 MiCriticBrowser >> initializeMenu [
+	editMenu := self newMenu.
+	editMenu addItem: [ :item | 
+		item
+			name: 'Delete rule';
+			icon: (self iconNamed: #smallDelete);
+			action: [ self deleteSelectedRule. self updateQueriesList ].
+		]
 ]
 
 { #category : #accessing }
 MiCriticBrowser >> initializePresenters [
 	
 	super initializePresenters.
+	self initializeMenu.
 	self initializeLists.
 	self initializeButtons.
 	

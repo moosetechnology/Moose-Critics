@@ -7,7 +7,7 @@ Class {
 		'basicEntity',
 		'stubEntity'
 	],
-	#category : 'MooseIDE-CriticBrowser-Tests'
+	#category : #'MooseIDE-CriticBrowser-Tests'
 }
 
 { #category : #asserting }
@@ -50,6 +50,16 @@ MiCriticBrowserTest >> testChildrenFor [
 	
 	browser updateResultList: browser model getCompleteOutput.
 	self assertCollection: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) includesAll: { entity }
+]
+
+{ #category : #test }
+MiCriticBrowserTest >> testDeleteSelectedRule [
+	browser model addRule: stubRule; addRule: deadRule.
+	browser updateQueriesList.
+	browser queries selectItem: stubRule.
+	self assert: browser model rules size equals: 2.
+	browser deleteSelectedRule.
+	self assert: browser model rules size equals: 1
 ]
 
 { #category : #test }

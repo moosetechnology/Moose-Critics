@@ -9,13 +9,20 @@ Class {
 		'rules',
 		'output'
 	],
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
 
 { #category : #accessing }
 MiCriticBrowserModel >> addRule: aRule [
 
 	(aRule class = MiCBRule) ifTrue: [ rules add: aRule ]
+]
+
+{ #category : #deleting }
+MiCriticBrowserModel >> deleteRule: aMiCBRule [ 
+	(rules indexOf: aMiCBRule) = 0
+		ifFalse: [ rules remove: aMiCBRule ]
+	
 ]
 
 { #category : #accessing }

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'model'
 	],
-	#category : 'MooseIDE-CriticBrowser-Tests'
+	#category : #'MooseIDE-CriticBrowser-Tests'
 }
 
 { #category : #initialization }
@@ -22,6 +22,15 @@ MiCriticBrowserModelTest >> testAddRule [
 	
 	model addRule: (MiCBRule named: 'test' on: MiCriticBrowserPharoCodeQuery new).
 	self assert: model rules size equals: 1 
+]
+
+{ #category : #test }
+MiCriticBrowserModelTest >> testDeleteRule [
+	| rule |
+	rule := (MiCBRule named: 'test' on: MiCriticBrowserPharoCodeQuery new).
+	model addRule: rule.
+	model deleteRule: rule.
+	self assert: model rules size equals: 0
 ]
 
 { #category : #test }
