@@ -69,7 +69,7 @@ MiCriticBrowserModel >> runRules [
 
 { #category : #accessing }
 MiCriticBrowserModel >> setEntities: aMooseObject [
-	aMooseObject isCollection
-		ifTrue: [ entities := aMooseObject allUsing: FamixTNamedEntity ]
-		ifFalse: [ entities := ({aMooseObject} asMooseGroup) allUsing: FamixTNamedEntity ].
+	entities := aMooseObject isCollection
+		ifTrue: [ aMooseObject allUsing: FamixTNamedEntity ]
+		ifFalse: [ ({aMooseObject} asMooseGroup) allUsing: FamixTNamedEntity ].
 ]

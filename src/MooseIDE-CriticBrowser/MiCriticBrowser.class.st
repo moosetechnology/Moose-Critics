@@ -250,13 +250,13 @@ MiCriticBrowser >> runButtonAction [
 { #category : #'selected object' }
 MiCriticBrowser >> selectedQueries [
 "shows in the output list only the entities validating the selected queries (or the complete output if no query is selected)"
-	| entitiesList |
-	entitiesList := MooseGroup new.
+	| entities |
+	entities := MooseGroup new.
 	(queries selectedItems) 
 		ifNotEmpty: [
 			(queries selectedItems) do: 
-				[ :each | entitiesList := entitiesList | (model output at: each) ].
-			self updateResultList: entitiesList ]
+				[ :each | entities := entities | (model output at: each) ].
+			self updateResultList: entities ]
 		ifEmpty: [ 
 			self updateResultList: model getCompleteOutput ]
 ]
