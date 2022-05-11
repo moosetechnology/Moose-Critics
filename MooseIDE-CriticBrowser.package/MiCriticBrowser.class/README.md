@@ -1,1 +1,0 @@
-Critique browser for Famix Models.
