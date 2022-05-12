@@ -288,9 +288,9 @@ MiCriticBrowser >> updateQueriesList [
 { #category : #'updating screen' }
 MiCriticBrowser >> updateResultList: aCollection [
 	| roots |
-	roots := (aCollection allEntityTypes collect: [ :type | 
-		           aCollection allWithType: type ]) asOrderedCollection.
-	roots do: [ :group | group description: group details ].
+	roots := (aCollection allViolatingEntitiesType collect: [ :type | 
+		           aCollection allWithViolatingEntitiesType: type ]) asOrderedCollection.
+	roots do: [ :group | group description: group stringForCBDescription ].
 	queryResult roots:
 		(roots sort: [ :group | group description onlyLetters ] ascending).
 	queryResult roots: roots.

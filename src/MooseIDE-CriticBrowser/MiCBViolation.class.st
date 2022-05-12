@@ -23,7 +23,12 @@ MiCBViolation class >> rule: aMiCBRule violatedBy: anEntity [
 	^ self new 
 		violatedRule: aMiCBRule;
 		violatingEntity: anEntity;
-		yourself
+		yourself 
+]
+
+{ #category : #accessing }
+MiCBViolation >> name [
+	^ self violatingEntity name, ' -> ', self violatedRule name 
 ]
 
 { #category : #accessing }
