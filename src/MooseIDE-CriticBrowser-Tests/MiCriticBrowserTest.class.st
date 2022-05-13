@@ -32,7 +32,7 @@ MiCriticBrowserTest >> setUp [
 	stubRule := MiCBRule named: 'test1' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
 	deadRule := MiCBRule named: 'test2' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]')).
 	queriesBrowserRule := MiCBRule named: 'test3' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)).
-	queriesBrowserRule query query parent: (FQTypeQuery types: { FamixJavaMethod } ).
+	queriesBrowserRule query query parent: (FQTypeQuery types: { FamixStMethod } ).
 	stubEntity := FamixStMethod new.
 	stubEntity name: 'test1'; isStub: true.
 	basicEntity := FamixStMethod new.
@@ -83,7 +83,7 @@ MiCriticBrowserTest >> testExportRulesToStream [
 	self assert: rule1 class equals: MiCBRule.
 	self assert: rule1 query equals: '[ :entity | entity isDead ]'.
 	self assert: rule2 query equals: '[ :entity | entity isStub ]'.
-	self assert: rule3 query equals: '(FQTypeQuery types: {FamixJavaMethod}) --> (FQBooleanQuery property: #isDead)'.
+	self assert: rule3 query equals: '(FQTypeQuery types: {FamixStMethod}) --> (FQBooleanQuery property: #isDead)'.
 	stonReader close
 	
 ]
@@ -106,6 +106,7 @@ MiCriticBrowserTest >> testFollowEntity [
 MiCriticBrowserTest >> testImportRulesFromStream [
 	| fileReference writeStream readStream |
 	browser model addRule: deadRule; addRule: stubRule; addRule: queriesBrowserRule.
+	browser model setEntities: { stubEntity. basicEntity } asMooseGroup.
 	fileReference := (FileSystem memory root / 'rules.ston') asFileReference.
 	writeStream := fileReference writeStream.
 	browser exportRules: (browser model rules) toStream: writeStream.
@@ -115,9 +116,9 @@ MiCriticBrowserTest >> testImportRulesFromStream [
 	readStream := fileReference readStream.
 	browser importRulesFromStream: readStream.
 	readStream close.
-	self assert: (browser model rules at: 1) query query equals: deadRule query query.
-	self assert: (browser model rules at: 2) query query equals: stubRule query query.
-	self assert: (browser model rules at: 3) query query property equals: queriesBrowserRule query query property.
+	self assertCollection: ((browser model rules at: 1) runOn: browser model entities) allEntities includesAll: { basicEntity. stubEntity }.
+	self assertCollection: ((browser model rules at: 2) runOn: browser model entities) allEntities includesAll: { stubEntity }.
+	self assertCollection: ((browser model rules at: 3) runOn: browser model entities) allEntities includesAll: { stubEntity }.
 
 ]
 
