@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'stubRule',
 		'deadRule',
+		'queriesBrowserRule',
 		'basicEntity',
 		'stubEntity'
 	],
@@ -30,6 +31,8 @@ MiCriticBrowserTest >> setUp [
 	super setUp.
 	stubRule := MiCBRule named: 'test1' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
 	deadRule := MiCBRule named: 'test2' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]')).
+	queriesBrowserRule := MiCBRule named: 'test3' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)).
+	queriesBrowserRule query query parent: (FQTypeQuery types: { FamixJavaMethod } ).
 	stubEntity := FamixStMethod new.
 	stubEntity name: 'test1'; isStub: true.
 	basicEntity := FamixStMethod new.
@@ -64,8 +67,8 @@ MiCriticBrowserTest >> testDeleteSelectedRule [
 
 { #category : #test }
 MiCriticBrowserTest >> testExportRulesToStream [
-	| fileReference writeStream readStream stonReader rule1 rule2 |
-	browser model addRule: deadRule; addRule: stubRule.
+	| fileReference writeStream readStream stonReader rule1 rule2 rule3 |
+	browser model addRule: deadRule; addRule: stubRule; addRule: queriesBrowserRule.
 	fileReference := (FileSystem memory root / 'rules.ston') asFileReference.
 	writeStream := fileReference writeStream.
 	browser exportRules: (browser model rules) toStream: writeStream.
@@ -75,9 +78,11 @@ MiCriticBrowserTest >> testExportRulesToStream [
 	stonReader := STONReader on: fileReference readStream.
 	rule1 := stonReader parseObject.
 	rule2 := stonReader parseObject.
+	rule3 := stonReader parseObject.
 	self assert: rule1 class equals: MiCBRule.
 	self assert: rule1 query equals: '[ :entity | entity isDead ]'.
-	self assert: rule2 query equals: '[ :entity | entity isStub ]'
+	self assert: rule2 query equals: '[ :entity | entity isStub ]'.
+	self assert: rule3 query equals: '(FQTypeQuery types: {FamixJavaMethod}) --> (FQBooleanQuery property: #isDead)'
 	
 ]
 
