@@ -63,6 +63,25 @@ MiCriticBrowserTest >> testDeleteSelectedRule [
 ]
 
 { #category : #test }
+MiCriticBrowserTest >> testExportRulesToStream [
+	| fileReference writeStream readStream stonReader rule1 rule2 |
+	browser model addRule: deadRule; addRule: stubRule.
+	fileReference := (FileSystem memory root / 'rules.ston') asFileReference.
+	writeStream := fileReference writeStream.
+	browser exportRules: (browser model rules) toStream: writeStream.
+	writeStream close.
+	
+	readStream := fileReference readStream.
+	stonReader := STONReader on: fileReference readStream.
+	rule1 := stonReader parseObject.
+	rule2 := stonReader parseObject.
+	self assert: rule1 class equals: MiCBRule.
+	self assert: rule1 query equals: '[ :entity | entity isDead ]'.
+	self assert: rule2 query equals: '[ :entity | entity isStub ]'
+	
+]
+
+{ #category : #test }
 MiCriticBrowserTest >> testFollowEntity [
 	| mooseObjects entity1 entity2 entity3 |
 	entity1 := FamixStClass new. entity1 name: 'Test'.

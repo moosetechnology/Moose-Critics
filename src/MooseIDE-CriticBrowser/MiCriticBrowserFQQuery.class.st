@@ -1,8 +1,17 @@
 Class {
 	#name : #MiCriticBrowserFQQuery,
 	#superclass : #MiCriticBrowserAbstractQuery,
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
+
+{ #category : #converting }
+MiCriticBrowserFQQuery >> convertToSTONString [
+"converts the query to a string used to save the query in STON format, the string must return the query when evaluated by the Smalltalk compiler"
+	| stream |
+	stream := (String new) writeStream.
+	query storeWithParentsOn: stream.
+	^ stream contents
+]
 
 { #category : #running }
 MiCriticBrowserFQQuery >> runOn: aGroupOfEntities [

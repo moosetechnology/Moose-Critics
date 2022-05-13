@@ -58,6 +58,23 @@ MiCBRule >> runOn: aCollection [
 		[ :each | (MiCBViolation rule: self violatedBy: each) ]) asMooseGroup specialize.
 ]
 
+{ #category : #'ston persistence' }
+MiCBRule >> stonOn: stonWriter [
+	stonWriter
+		writeObject: self
+		streamMap: [ :dictionary | 
+			self class stonAllInstVarNames
+				do: [ :each | 
+					(self instVarNamed: each)
+						ifNotNil: [ :value | 
+							dictionary
+								at: each asSymbol
+								put:
+									((value class inheritsFrom: MiCriticBrowserAbstractQuery)
+										ifTrue: [ value convertToSTONString ]
+										ifFalse: [ value ]) ] ] ]
+]
+
 { #category : #accessing }
 MiCBRule >> summary [
 

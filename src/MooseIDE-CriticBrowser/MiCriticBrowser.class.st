@@ -106,6 +106,25 @@ MiCriticBrowser >> entitiesList [
 	^ entitiesList
 ]
 
+{ #category : #'as yet unclassified' }
+MiCriticBrowser >> exportRules: aCollectionOfRules [
+	| fileReference |
+	fileReference := UITheme builder
+		chooseForSaveFileReference: 'Choose location'
+		extensions: 'ston'
+		path: ''.
+	fileReference
+		ifNotNil: [ fileReference
+				writeStreamDo: [ :stream | 
+					self exportRules: aCollectionOfRules toStream: stream.
+					Notification signal: 'Save successful!' ] ]
+]
+
+{ #category : #'as yet unclassified' }
+MiCriticBrowser >> exportRules: aCollectionOfRules toStream: aStream [
+	aCollectionOfRules do: [ :rule | SCExporter export: rule onStream: aStream ]
+]
+
 { #category : #actions }
 MiCriticBrowser >> followEntity: anEntity [
 	self model setEntities: (anEntity asMooseGroup).

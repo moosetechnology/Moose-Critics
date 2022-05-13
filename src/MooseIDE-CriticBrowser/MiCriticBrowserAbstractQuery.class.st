@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'query'
 	],
-	#category : 'MooseIDE-CriticBrowser'
+	#category : #'MooseIDE-CriticBrowser'
 }
 
 { #category : #'instance creation' }
@@ -15,6 +15,12 @@ MiCriticBrowserAbstractQuery class >> on: aQuery [
 	^self new
 		query: aQuery ;
 		yourself
+]
+
+{ #category : #converting }
+MiCriticBrowserAbstractQuery >> convertToSTONString [
+"converts the query to a string used to save the query in STON format, the string must return the query when evaluated by the Smalltalk compiler"
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }

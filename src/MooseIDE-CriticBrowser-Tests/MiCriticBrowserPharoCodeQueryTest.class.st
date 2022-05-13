@@ -7,12 +7,20 @@ Class {
 	#instVars : [
 		'handler'
 	],
-	#category : 'MooseIDE-CriticBrowser-Tests'
+	#category : #'MooseIDE-CriticBrowser-Tests'
 }
 
 { #category : #tests }
 MiCriticBrowserPharoCodeQueryTest >> setUp [ 
 	handler := MiCriticBrowserPharoCodeQuery new.
+]
+
+{ #category : #test }
+MiCriticBrowserPharoCodeQueryTest >> testConvertToSTONString [
+	| query textQuery |
+	textQuery := '[ :entity | entity + 2 ]'.
+	query := MiCriticBrowserPharoCodeQuery on: textQuery.
+	self assert: query convertToSTONString equals: textQuery
 ]
 
 { #category : #tests }

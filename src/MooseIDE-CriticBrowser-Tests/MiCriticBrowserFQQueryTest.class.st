@@ -4,8 +4,19 @@ A MiCriticBrowserFQQueryTest is a test class for testing the behavior of MiCriti
 Class {
 	#name : #MiCriticBrowserFQQueryTest,
 	#superclass : #TestCase,
-	#category : 'MooseIDE-CriticBrowser-Tests'
+	#category : #'MooseIDE-CriticBrowser-Tests'
 }
+
+{ #category : #test }
+MiCriticBrowserFQQueryTest >> testConvertToSTONString [
+	| queryFQ queryCB queryOutput |
+	queryFQ := FQBooleanQuery property: #isDead.
+	queryFQ parent: (FQTypeQuery types: { FamixJavaMethod } ).
+	queryCB := MiCriticBrowserFQQuery on: queryFQ.
+	queryOutput := '(FQTypeQuery types: {FamixJavaMethod}) --> (FQBooleanQuery property: #isDead)'.
+	self assert: queryCB convertToSTONString equals: queryOutput
+	
+]
 
 { #category : #test }
 MiCriticBrowserFQQueryTest >> testRunOnCollection [
