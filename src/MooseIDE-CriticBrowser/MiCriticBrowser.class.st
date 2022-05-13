@@ -131,6 +131,24 @@ MiCriticBrowser >> followEntity: anEntity [
 	self updateEntitiesList 
 ]
 
+{ #category : #'as yet unclassified' }
+MiCriticBrowser >> importRulesFromStream: aStream [
+	| reader rulesCollection |
+	reader := STONReader on: aStream.
+	rulesCollection := OrderedCollection new.
+	[ reader atEnd ] whileFalse: [ rulesCollection add: reader parseObject ].
+	rulesCollection do: [ :rule | 
+		| temp | 
+		temp := Smalltalk compiler evaluate: rule query.
+		(temp class = FullBlockClosure) 
+			ifTrue: [ rule query: (MiCriticBrowserPharoCodeQuery on: rule query) ]
+			ifFalse: [ rule query: (MiCriticBrowserFQQuery on: temp) ].
+		model addRule: rule
+	].
+	reader close
+	
+]
+
 { #category : #initialization }
 MiCriticBrowser >> initialize [
 	super initialize.

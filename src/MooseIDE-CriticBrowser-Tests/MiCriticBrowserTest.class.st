@@ -79,10 +79,12 @@ MiCriticBrowserTest >> testExportRulesToStream [
 	rule1 := stonReader parseObject.
 	rule2 := stonReader parseObject.
 	rule3 := stonReader parseObject.
+	readStream close.
 	self assert: rule1 class equals: MiCBRule.
 	self assert: rule1 query equals: '[ :entity | entity isDead ]'.
 	self assert: rule2 query equals: '[ :entity | entity isStub ]'.
-	self assert: rule3 query equals: '(FQTypeQuery types: {FamixJavaMethod}) --> (FQBooleanQuery property: #isDead)'
+	self assert: rule3 query equals: '(FQTypeQuery types: {FamixJavaMethod}) --> (FQBooleanQuery property: #isDead)'.
+	stonReader close
 	
 ]
 
@@ -98,6 +100,25 @@ MiCriticBrowserTest >> testFollowEntity [
 	mooseObjects do: [ :mooseObject | 
 		self bus globallySelect: mooseObject.
 		self assertFollowActionFor: mooseObject ]
+]
+
+{ #category : #test }
+MiCriticBrowserTest >> testImportRulesFromStream [
+	| fileReference writeStream readStream |
+	browser model addRule: deadRule; addRule: stubRule; addRule: queriesBrowserRule.
+	fileReference := (FileSystem memory root / 'rules.ston') asFileReference.
+	writeStream := fileReference writeStream.
+	browser exportRules: (browser model rules) toStream: writeStream.
+	writeStream close.
+	
+	browser model rules removeAll.
+	readStream := fileReference readStream.
+	browser importRulesFromStream: readStream.
+	readStream close.
+	self assert: (browser model rules at: 1) query query equals: deadRule query query.
+	self assert: (browser model rules at: 2) query query equals: stubRule query query.
+	self assert: (browser model rules at: 3) query query property equals: queriesBrowserRule query query property.
+
 ]
 
 { #category : #test }
