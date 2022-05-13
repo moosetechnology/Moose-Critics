@@ -11,6 +11,8 @@ Class {
 		'runButton',
 		'queryResult',
 		'inspectButton',
+		'importButton',
+		'exportButton',
 		'rulesMakerPresenter',
 		'openRulesMakerButton'
 	],
@@ -74,6 +76,8 @@ MiCriticBrowser >> defaultLayout [
 		yourself);
 		add: (SpBoxLayout newLeftToRight
 			add: inspectButton expand: false;
+			addLast: importButton;
+			addLast: exportButton;
 			addLast: openRulesMakerButton;
 			spacing: 5; 
 			addLast: runButton;
@@ -106,13 +110,13 @@ MiCriticBrowser >> entitiesList [
 	^ entitiesList
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'load and saving' }
 MiCriticBrowser >> exportRules: aCollectionOfRules [
 	| fileReference |
 	fileReference := UITheme builder
 		chooseForSaveFileReference: 'Choose location'
-		extensions: 'ston'
-		path: ''.
+		extensions: { 'ston' }
+		path: './pharo-local/rules.ston'.
 	fileReference
 		ifNotNil: [ fileReference
 				writeStreamDo: [ :stream | 
@@ -120,7 +124,7 @@ MiCriticBrowser >> exportRules: aCollectionOfRules [
 					Notification signal: 'Save successful!' ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'load and saving' }
 MiCriticBrowser >> exportRules: aCollectionOfRules toStream: aStream [
 	aCollectionOfRules do: [ :rule | SCExporter export: rule onStream: aStream ]
 ]
@@ -131,7 +135,22 @@ MiCriticBrowser >> followEntity: anEntity [
 	self updateEntitiesList 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'load and saving' }
+MiCriticBrowser >> importRules [
+	| fileReference |
+	fileReference := UITheme builder
+		chooseExistingFileReference: 'Choose rules file to import'
+		extensions: { 'ston' }
+		path: './pharo-local'.
+	fileReference
+		ifNotNil: [ fileReference
+				readStreamDo: [ :stream | 
+					self importRulesFromStream: stream.
+					Notification signal: 'Import successful!' ] ].
+	self updateQueriesList
+]
+
+{ #category : #'load and saving' }
 MiCriticBrowser >> importRulesFromStream: aStream [
 	| reader rulesCollection |
 	reader := STONReader on: aStream.
@@ -160,6 +179,8 @@ MiCriticBrowser >> initializeButtons [
 	inspectButton := self newButton.
 	openRulesMakerButton := self newButton.
 	runButton := self newButton.
+	importButton := self newButton.
+	exportButton := self newButton.
 	
 	openRulesMakerButton
 		label: 'Add rules';
@@ -175,6 +196,16 @@ MiCriticBrowser >> initializeButtons [
 		label: 'Inspect model';
 		icon: (self iconNamed: #glamorousInspect);
 		action: [ self model entities inspect ].
+		
+	importButton
+		label: 'Import rules';
+		icon: (self iconNamed: #smallOpen);
+		action: [ self importRules ].
+	
+	exportButton
+		label: 'Export rules';
+		icon: (self iconNamed: #smallSave);
+		action: [ self exportRules: model rules ]
 ]
 
 { #category : #initialization }
