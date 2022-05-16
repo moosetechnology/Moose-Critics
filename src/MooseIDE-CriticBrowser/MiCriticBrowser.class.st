@@ -14,6 +14,7 @@ Class {
 		'importButton',
 		'exportButton',
 		'rulesMakerPresenter',
+		'rulesEditorPresenter',
 		'openRulesMakerButton'
 	],
 	#category : #'MooseIDE-CriticBrowser'
@@ -239,10 +240,18 @@ MiCriticBrowser >> initializeMenu [
 	editMenu := self newMenu.
 	editMenu addItem: [ :item | 
 		item
+			name: 'Edit rule';
+			icon: (self iconNamed: #glamorousEdit);
+			action: [ 
+				rulesEditorPresenter setRuleToEdit: queries selectedItems anyOne.
+				rulesEditorPresenter openDialog
+					] ];
+				addItem: [ :item | 
+		item
 			name: 'Delete rule';
 			icon: (self iconNamed: #smallDelete);
-			action: [ self deleteSelectedRule. self updateQueriesList ].
-		]
+			action: [ self deleteSelectedRule. self updateQueriesList ]
+		] 
 ]
 
 { #category : #accessing }
@@ -254,6 +263,7 @@ MiCriticBrowser >> initializePresenters [
 	self initializeButtons.
 	
 	rulesMakerPresenter := MiCriticBrowserAddRulesPresenter on: self.
+	rulesEditorPresenter := MiCriticBrowserEditRulePresenter on: self.
 	
 	self focusOrder
 			add: queries;
@@ -294,6 +304,12 @@ MiCriticBrowser >> queries [
 MiCriticBrowser >> queryResult [
 "used for testing purposes, do not access outside of tests"
 	^ queryResult 
+]
+
+{ #category : #'accessing - testing' }
+MiCriticBrowser >> rulesEditorPresenter [
+"used for testing purposes, do not access outside of tests"
+	^ rulesEditorPresenter
 ]
 
 { #category : #'accessing - testing' }

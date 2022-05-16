@@ -84,6 +84,20 @@ MiCriticBrowserModelTest >> testOutputOfCollection [
 	self assertCollection: (model outputOfCollection: { rule1. rule2 }) allEntities includesAll: group
 ]
 
+{ #category : #test }
+MiCriticBrowserModelTest >> testRemoveRuleResult [
+	| rule |
+	rule := (MiCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity ]')).
+	model addRule: rule.
+	self assert: (model output includesKey: rule) equals: false.
+	model setEntities: {  } asMooseGroup.
+	model runRules.
+	self assert: (model output includesKey: rule) equals: true.
+	model removeRuleResult: rule.
+	self assert: (model output includesKey: rule) equals: false.
+	
+]
+
 { #category : #tests }
 MiCriticBrowserModelTest >> testRunRules [
 	| entity1 entity2 rule1 rule2 group |

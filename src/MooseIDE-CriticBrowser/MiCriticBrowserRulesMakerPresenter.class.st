@@ -106,6 +106,26 @@ MiCriticBrowserRulesMakerPresenter >> defaultTitle [
 	^ 'Rules maker'
 ]
 
+{ #category : #'as yet unclassified' }
+MiCriticBrowserRulesMakerPresenter >> editRule: aRule [
+	aRule name: ruleTitle text.
+	aRule query: (codeButton state 
+		ifTrue: [ MiCriticBrowserPharoCodeQuery on: (codeInput text) ] 
+		ifFalse: [ MiCriticBrowserFQQuery on: queryDroplist selectedItem ]).
+	aRule summary: ruleSummary text.
+	owner hasBeenEdited: aRule
+]
+
+{ #category : #'as yet unclassified' }
+MiCriticBrowserRulesMakerPresenter >> fillRuleToEdit: aRule [
+	ruleTitle text: aRule name.
+	ruleSummary text: aRule summary.
+	(aRule query class = MiCriticBrowserPharoCodeQuery)
+		ifTrue: [codeInput text: aRule query query asString]
+		ifFalse: [ codeInput text: '[ :entity | entity ]' ]
+	
+]
+
 { #category : #initialization }
 MiCriticBrowserRulesMakerPresenter >> initialize [
 	super initialize
@@ -178,4 +198,16 @@ MiCriticBrowserRulesMakerPresenter >> queriesBrowserButtonAction [
 { #category : #'accessing - tests' }
 MiCriticBrowserRulesMakerPresenter >> queryDroplist [
 	^ queryDroplist
+]
+
+{ #category : #'accessing - tests' }
+MiCriticBrowserRulesMakerPresenter >> ruleSummary [
+"used for testing purposes, do not access outside of tests"
+	^ ruleSummary
+]
+
+{ #category : #'accessing - tests' }
+MiCriticBrowserRulesMakerPresenter >> ruleTitle [
+"used for testing purposes, do not access outside of tests"
+	^ ruleTitle
 ]

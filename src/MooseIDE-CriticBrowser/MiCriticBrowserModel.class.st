@@ -68,6 +68,11 @@ MiCriticBrowserModel >> outputOfCollection: aCollection [
 	^ result 
 ]
 
+{ #category : #removing }
+MiCriticBrowserModel >> removeRuleResult: aRule [
+	output removeKey: aRule ifAbsent: [  ].
+]
+
 { #category : #accessing }
 MiCriticBrowserModel >> rules [
 

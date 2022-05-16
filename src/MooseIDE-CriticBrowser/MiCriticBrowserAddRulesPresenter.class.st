@@ -1,3 +1,6 @@
+"
+Dialog window used to add new rules, uses the RulesMakerPresenter.
+"
 Class {
 	#name : #MiCriticBrowserAddRulesPresenter,
 	#superclass : #MiPresenter,
