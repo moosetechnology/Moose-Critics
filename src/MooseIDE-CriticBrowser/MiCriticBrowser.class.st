@@ -38,7 +38,7 @@ MiCriticBrowser class >> title [
 { #category : #'window control' }
 MiCriticBrowser >> browserClosed [
 	super browserClosed.
-	self application unregisterConsumer: rulesMakerPresenter 
+	application unregisterConsumer: rulesMakerPresenter
 ]
 
 { #category : #testing }
@@ -253,8 +253,7 @@ MiCriticBrowser >> initializePresenters [
 	self initializeLists.
 	self initializeButtons.
 	
-	rulesMakerPresenter := self instantiate: MiCriticBrowserRulesMakerPresenter on: model.
-	rulesMakerPresenter mainWindow: self.
+	rulesMakerPresenter := MiCriticBrowserAddRulesPresenter on: self.
 	
 	self focusOrder
 			add: queries;

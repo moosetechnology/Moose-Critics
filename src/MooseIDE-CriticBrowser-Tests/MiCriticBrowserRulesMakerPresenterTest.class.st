@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'rulesMaker'
 	],
-	#category : 'MooseIDE-CriticBrowser-Tests'
+	#category : #'MooseIDE-CriticBrowser-Tests'
 }
 
 { #category : #running }
@@ -18,7 +18,7 @@ MiCriticBrowserRulesMakerPresenterTest >> browserClass [
 { #category : #running }
 MiCriticBrowserRulesMakerPresenterTest >> setUp [
 	super setUp.
-	rulesMaker := browser rulesMakerPresenter.
+	rulesMaker := browser rulesMakerPresenter queryPresenter.
 	browser openRulesMakerButton performAction
 
 ]
@@ -33,7 +33,7 @@ MiCriticBrowserRulesMakerPresenterTest >> tearDown [
 MiCriticBrowserRulesMakerPresenterTest >> testAddInputtedCodeRule [
 	rulesMaker codeButtonAction.
 	rulesMaker codeInput text: '[ :entity | entity isDead ]'.
-	rulesMaker addButton performAction.
+	rulesMaker addButtonAction.
 	
 	self assert: browser model rules size equals: 1
 ]
@@ -45,7 +45,7 @@ MiCriticBrowserRulesMakerPresenterTest >> testAddInputtedFQRule [
 	rulesMaker queriesBrowserButton click.
 	rulesMaker queryDroplist items: { query }.
 	rulesMaker queryDroplist selectItem: query.
-	rulesMaker addButton performAction.
+	rulesMaker addButtonAction.
 	
 	self assert: browser model rules size equals: 1.
 ]

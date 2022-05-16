@@ -10,37 +10,27 @@ Class {
 		'codePresenter',
 		'codeInput',
 		'queriesBrowserPresenter',
-		'addButton',
 		'queryDroplist',
 		'changeableBlock',
-		'closeButton',
-		'mainWindow',
 		'ruleTitle',
 		'ruleSummary'
 	],
 	#category : #'MooseIDE-CriticBrowser'
 }
 
-{ #category : #'accessing - tests' }
-MiCriticBrowserRulesMakerPresenter >> addButton [
-"used for testing purposes, do not access outside of tests"
-	^ addButton
-]
-
 { #category : #adding }
 MiCriticBrowserRulesMakerPresenter >> addButtonAction [
 	codeButton state 
 		ifTrue: [ self addInputtedCodeRule ] 
 		ifFalse: [ self addInputtedFQRule ].
-	ruleTitle text: ''.
-	mainWindow updateQueriesList 
+	ruleTitle text: ''
 ]
 
 { #category : #adding }
 MiCriticBrowserRulesMakerPresenter >> addInputtedCodeRule [
 	codeInput text ifNotNil: 
 		[ 
-		mainWindow model addRule: 
+		owner addRule: 
 			(MiCBRule named: (ruleTitle text) 
 							on: (MiCriticBrowserPharoCodeQuery on: (codeInput text))
 							summary: ruleSummary text) 
@@ -52,7 +42,7 @@ MiCriticBrowserRulesMakerPresenter >> addInputtedCodeRule [
 MiCriticBrowserRulesMakerPresenter >> addInputtedFQRule [
 	queryDroplist selectedItem ifNotNil: 
 		[ 
-		mainWindow model addRule: 
+		owner addRule: 
 			(MiCBRule named: (ruleTitle text) 
 							on: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem))
 							summary: ruleSummary text) 
@@ -73,11 +63,6 @@ MiCriticBrowserRulesMakerPresenter >> codeButtonAction [
 MiCriticBrowserRulesMakerPresenter >> codeInput [
 "used for testing purposes, do not access outside of tests"
 	^ codeInput
-]
-
-{ #category : #initialization }
-MiCriticBrowserRulesMakerPresenter >> consume: aQuery [
-	queryDroplist items: self fetchQueries 
 ]
 
 { #category : #layout }
@@ -122,12 +107,6 @@ MiCriticBrowserRulesMakerPresenter >> defaultTitle [
 ]
 
 { #category : #initialization }
-MiCriticBrowserRulesMakerPresenter >> fetchQueries [
-	^ ((self application itemsFor: FQAbstractQuery)
-		asOrderedCollection) select: [ :each | each isValid ] 
-]
-
-{ #category : #initialization }
 MiCriticBrowserRulesMakerPresenter >> initialize [
 	super initialize
 ]
@@ -136,30 +115,13 @@ MiCriticBrowserRulesMakerPresenter >> initialize [
 MiCriticBrowserRulesMakerPresenter >> initializeButtons [
 	codeButton := self newRadioButton.
 	queriesBrowserButton := self newRadioButton.
-	addButton := self newButton.
-	closeButton := self newButton.
 	
 	codeButton label: 'Pharo Code';
 		whenActivatedDo: [ self codeButtonAction ];
 		associatedRadioButtons: { queriesBrowserButton }.
 	
 	queriesBrowserButton label: 'Queries Browser';
-		whenActivatedDo: [ self queriesBrowserButtonAction ].
-	
-	addButton label: 'Add query';
-		icon: (self iconNamed: #smallAdd);
-		action: [ self addButtonAction ].
-		
-	closeButton label: 'Close';
-		icon: (self iconNamed: #glamorousClose);
-		action: [ self window close ]
-]
-
-{ #category : #initialization }
-MiCriticBrowserRulesMakerPresenter >> initializeDialogWindow: aDialogWindowPresenter [
-	aDialogWindowPresenter 
-		addButton: addButton;
-		addButton: closeButton
+		whenActivatedDo: [ self queriesBrowserButtonAction ]
 ]
 
 { #category : #initialization }
@@ -181,7 +143,7 @@ MiCriticBrowserRulesMakerPresenter >> initializePresenters [
 		yourself.
 	
 	queryDroplist startWithoutSelection;
-					  items: self fetchQueries;
+					  items: owner fetchQueries;
 					  centered.
 	
 	queriesBrowserPresenter := MiPresenter new 
@@ -200,11 +162,6 @@ MiCriticBrowserRulesMakerPresenter >> initializeWindow: aWindowPresenter [
 ]
 
 { #category : #accessing }
-MiCriticBrowserRulesMakerPresenter >> mainWindow: aWindowPresenter [
-	mainWindow := aWindowPresenter 
-]
-
-{ #category : #accessing }
 MiCriticBrowserRulesMakerPresenter >> queriesBrowserButton [
 	^ queriesBrowserButton
 ]
@@ -220,16 +177,5 @@ MiCriticBrowserRulesMakerPresenter >> queriesBrowserButtonAction [
 
 { #category : #'accessing - tests' }
 MiCriticBrowserRulesMakerPresenter >> queryDroplist [
-"used for testing purposes, do not access outside of tests"
 	^ queryDroplist
-]
-
-{ #category : #removing }
-MiCriticBrowserRulesMakerPresenter >> remove: aQuery [
-	queryDroplist items: self fetchQueries 
-]
-
-{ #category : #updating }
-MiCriticBrowserRulesMakerPresenter >> update: aQuery [
-	queryDroplist items: self fetchQueries 
 ]
