@@ -30,6 +30,13 @@ FamixCBViolation class >> rule: aFamixCBRule violatedBy: anEntity [
 		yourself
 ]
 
+{ #category : #printing }
+FamixCBViolation >> mooseNameOn: aStream [
+	self violatingEntity ifNotNil: [ aStream nextPutAll: self violatingEntity name ].
+	aStream nextPutAll: ' -> '.
+	self violatedRule ifNotNil: [ aStream nextPutAll: self violatedRule name ]
+]
+
 { #category : #accessing }
 FamixCBViolation >> violatedRule [
 	"Relation named: #violatedRule type: #FamixCBRule opposite: #violations"
