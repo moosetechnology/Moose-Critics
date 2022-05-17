@@ -47,7 +47,7 @@ MiCriticBrowserModelTest >> testGetCompleteOutput [
 	model setEntities: group.
 	model addRule: rule1; addRule: rule2.
 	model runRules.
-	self assert: model getCompleteOutput class equals: MiCBViolationGroup.
+	self assert: model getCompleteOutput class equals: FamixCBViolationGroup.
 	self assertCollection: model getCompleteOutput allEntities includesAll: group  
 	
 ]
@@ -62,7 +62,7 @@ MiCriticBrowserModelTest >> testOutputOf [
 	model setEntities: { entity } asMooseGroup.
 	model addRule: rule.
 	model runRules.
-	self assert: (model outputOf: rule) class equals: MiCBViolationGroup.
+	self assert: (model outputOf: rule) class equals: FamixCBViolationGroup.
 	self assertCollection: model getCompleteOutput allEntities includesAll: { entity }
 ]
 
@@ -80,7 +80,7 @@ MiCriticBrowserModelTest >> testOutputOfCollection [
 	model setEntities: group.
 	model addRule: rule1; addRule: rule2.
 	model runRules.
-	self assert: (model outputOfCollection: { rule1. rule2 }) class equals: MiCBViolationGroup.
+	self assert: (model outputOfCollection: { rule1. rule2 }) class equals: FamixCBViolationGroup.
 	self assertCollection: (model outputOfCollection: { rule1. rule2 }) allEntities includesAll: group
 ]
 

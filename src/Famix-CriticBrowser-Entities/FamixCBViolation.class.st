@@ -16,6 +16,20 @@ FamixCBViolation class >> annotation [
 	^self
 ]
 
+{ #category : #'as yet unclassified' }
+FamixCBViolation class >> annotationFamixCBViolationGroup [
+	<mooseGroup>
+	^ FamixCBViolationGroup 
+]
+
+{ #category : #initialization }
+FamixCBViolation class >> rule: aFamixCBRule violatedBy: anEntity [
+	^ self new 
+		violatedRule: aFamixCBRule;
+		violatingEntity: anEntity;
+		yourself
+]
+
 { #category : #accessing }
 FamixCBViolation >> violatedRule [
 	"Relation named: #violatedRule type: #FamixCBRule opposite: #violations"

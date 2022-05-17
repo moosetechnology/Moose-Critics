@@ -34,7 +34,7 @@ MiCriticBrowserModel >> entities [
 { #category : #accessing }
 MiCriticBrowserModel >> getCompleteOutput [
 	| result |
-	result := MiCBViolationGroup new.
+	result := FamixCBViolationGroup new.
 	output do: [ :each | result := result , each ].
 	^ result
 ]
@@ -63,7 +63,7 @@ MiCriticBrowserModel >> outputOf: aMiCBRule [
 { #category : #accessing }
 MiCriticBrowserModel >> outputOfCollection: aCollection [
 	| result |
-	result := MiCBViolationGroup new.
+	result := FamixCBViolationGroup new.
 	aCollection do: [ :rule | result := result , (self outputOf: rule) ].
 	^ result 
 ]

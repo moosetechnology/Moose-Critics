@@ -20,7 +20,7 @@ MiCBRuleTest >> testRunOn [
 	entity := FamixJavaMethod new.
 	stubEntity := FamixJavaMethod new. stubEntity isStub: true.
 	res := rule runOn: { entity. stubEntity } asMooseGroup.
-	self assert: (res class) equals: MiCBViolationGroup.
+	self assert: (res class) equals: FamixCBViolationGroup.
 	self assert: (res size) equals: 1.
 	self assert: ((res at: 1) class) equals: MiCBViolation.
 	self assert: ((res at: 1) violatingEntity) equals: stubEntity.

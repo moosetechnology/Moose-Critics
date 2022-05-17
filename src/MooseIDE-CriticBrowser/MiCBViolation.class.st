@@ -15,7 +15,7 @@ Class {
 { #category : #'as yet unclassified' }
 MiCBViolation class >> annotationMiCBViolationGroup [
 	<mooseGroup>
-	^ MiCBViolationGroup 
+	^ FamixCBViolationGroup 
 ]
 
 { #category : #initialization }
