@@ -5,7 +5,12 @@ Class {
 	#name : #MiCriticBrowserModelTest,
 	#superclass : #TestCase,
 	#instVars : [
-		'model'
+		'model',
+		'rule',
+		'stubRule',
+		'deadRule',
+		'stubEntity',
+		'deadEntity'
 	],
 	#category : #'MooseIDE-CriticBrowser-Tests'
 }
@@ -13,107 +18,75 @@ Class {
 { #category : #initialization }
 MiCriticBrowserModelTest >> setUp [
 	model := MiCriticBrowserModel new.
+	stubRule := FamixCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
+	deadRule := FamixCBRule named: 'test2' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
+	stubEntity := FamixStMethod named: 'test1'.
+	deadEntity := FamixStMethod named: 'test2'.
+	stubEntity isStub: true
 ]
 
 { #category : #tests }
 MiCriticBrowserModelTest >> testAddRule [
 	model addRule: 'test'.
 	self assert: model rules size equals: 0.
-	
-	model addRule: (MiCBRule named: 'test' on: MiCriticBrowserPharoCodeQuery new).
+	model addRule: stubRule.
 	self assert: model rules size equals: 1 
 ]
 
 { #category : #test }
 MiCriticBrowserModelTest >> testDeleteRule [
-	| rule |
-	rule := (MiCBRule named: 'test' on: MiCriticBrowserPharoCodeQuery new).
-	model addRule: rule.
-	model deleteRule: rule.
+	model addRule: stubRule.
+	model deleteRule: stubRule.
 	self assert: model rules size equals: 0
 ]
 
 { #category : #test }
 MiCriticBrowserModelTest >> testGetCompleteOutput [
-	| entity1 entity2 rule1 rule2 group |
-	entity1 := FamixStMethod new.
-	entity2 := FamixStMethod new.
-	entity1 isStub: true.
-	group := MooseGroup new.
-	group add: entity1; add: entity2.
-	rule1 := MiCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
-	rule2 := MiCBRule named: 'test2' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
-	
-	model setEntities: group.
-	model addRule: rule1; addRule: rule2.
+	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+	model addRule: stubRule; addRule: deadRule.
 	model runRules.
 	self assert: model getCompleteOutput class equals: FamixCBViolationGroup.
-	self assertCollection: model getCompleteOutput allEntities includesAll: group  
+	self assertCollection: model getCompleteOutput allEntities includesAll: { stubEntity. deadEntity }  
 	
 ]
 
 { #category : #test }
 MiCriticBrowserModelTest >> testOutputOf [
-	| entity rule |
-	entity := FamixJavaMethod new.
-	entity isStub: true.
-	rule := MiCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
-	
-	model setEntities: { entity } asMooseGroup.
-	model addRule: rule.
+	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+	model addRule: stubRule.
 	model runRules.
-	self assert: (model outputOf: rule) class equals: FamixCBViolationGroup.
-	self assertCollection: model getCompleteOutput allEntities includesAll: { entity }
+	self assert: (model outputOf: stubRule) class equals: FamixCBViolationGroup.
+	self assertCollection: model getCompleteOutput allEntities includesAll: { stubEntity }
 ]
 
 { #category : #test }
 MiCriticBrowserModelTest >> testOutputOfCollection [
-	| entity1 entity2 rule1 rule2 group |
-	entity1 := FamixStMethod new.
-	entity2 := FamixStMethod new.
-	entity1 isStub: true.
-	group := MooseGroup new.
-	group add: entity1; add: entity2.
-	rule1 := MiCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
-	rule2 := MiCBRule named: 'test2' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
-	
-	model setEntities: group.
-	model addRule: rule1; addRule: rule2.
+	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+	model addRule: stubRule; addRule: deadRule.
 	model runRules.
-	self assert: (model outputOfCollection: { rule1. rule2 }) class equals: FamixCBViolationGroup.
-	self assertCollection: (model outputOfCollection: { rule1. rule2 }) allEntities includesAll: group
+	self assert: (model outputOfCollection: { stubRule. deadRule }) class equals: FamixCBViolationGroup.
+	self assertCollection: (model outputOfCollection: { stubRule. deadRule }) allEntities includesAll: { stubEntity. deadEntity }
 ]
 
 { #category : #test }
 MiCriticBrowserModelTest >> testRemoveRuleResult [
-	| rule |
-	rule := (MiCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity ]')).
-	model addRule: rule.
-	self assert: (model output includesKey: rule) equals: false.
-	model setEntities: {  } asMooseGroup.
+	model addRule: stubRule.
+	self assert: (model output includesKey: stubRule) equals: false.
+	model setEntities: { } asMooseGroup.
 	model runRules.
-	self assert: (model output includesKey: rule) equals: true.
-	model removeRuleResult: rule.
-	self assert: (model output includesKey: rule) equals: false.
+	self assert: (model output includesKey: stubRule) equals: true.
+	model removeRuleResult: stubRule.
+	self assert: (model output includesKey: stubRule) equals: false.
 	
 ]
 
 { #category : #tests }
-MiCriticBrowserModelTest >> testRunRules [
-	| entity1 entity2 rule1 rule2 group |
-	entity1 := FamixStMethod new.
-	entity2 := FamixStMethod new.
-	entity1 isStub: true.
-	group := MooseGroup new.
-	group add: entity1; add: entity2.
-	rule1 := MiCBRule named: 'test1' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]'). 
-	rule2 := MiCBRule named: 'test2' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]').
-	
-	model setEntities: group; addRule: rule1; addRule: rule2.
+MiCriticBrowserModelTest >> testRunRules [	
+	model setEntities: { stubEntity. deadEntity } asMooseGroup; addRule: stubRule; addRule: deadRule.
 	model runRules.
 	self assert: model output size equals: 2.
-	self assertCollection: ((model outputOf: rule1) allEntities) includesAll: {entity1}.
-	self assertCollection: ((model outputOf: rule2) allEntities) includesAll: group.
+	self assertCollection: ((model outputOf: stubRule) allEntities) includesAll: {stubEntity}.
+	self assertCollection: ((model outputOf: deadRule) allEntities) includesAll: { stubEntity. deadEntity }.
 	
 ]
 

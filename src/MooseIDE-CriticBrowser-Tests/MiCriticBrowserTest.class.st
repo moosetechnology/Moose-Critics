@@ -29,9 +29,9 @@ MiCriticBrowserTest >> browserClass [
 { #category : #running }
 MiCriticBrowserTest >> setUp [
 	super setUp.
-	stubRule := MiCBRule named: 'test1' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
-	deadRule := MiCBRule named: 'test2' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]')).
-	queriesBrowserRule := MiCBRule named: 'test3' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)).
+	stubRule := FamixCBRule named: 'test1' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
+	deadRule := FamixCBRule named: 'test2' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isDead ]')).
+	queriesBrowserRule := FamixCBRule named: 'test3' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)).
 	queriesBrowserRule query query parent: (FQTypeQuery types: { FamixStMethod } ).
 	stubEntity := FamixStMethod new.
 	stubEntity name: 'test1'; isStub: true.
@@ -48,7 +48,7 @@ MiCriticBrowserTest >> testChildrenFor [
 	entity name: 'test'; isStub: true.
 	browser model 
 		setEntities: entity;
-		addRule: (MiCBRule named: 'test' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub)));
+		addRule: stubRule;
 		runRules.
 	
 	browser updateResultList: browser model getCompleteOutput.
@@ -80,7 +80,7 @@ MiCriticBrowserTest >> testExportRulesToStream [
 	rule2 := stonReader parseObject.
 	rule3 := stonReader parseObject.
 	readStream close.
-	self assert: rule1 class equals: MiCBRule.
+	self assert: rule1 class equals: FamixCBRule.
 	self assert: rule1 query equals: '[ :entity | entity isDead ]'.
 	self assert: rule2 query equals: '[ :entity | entity isStub ]'.
 	self assert: rule3 query equals: '(FQTypeQuery types: {FamixStMethod}) --> (FQBooleanQuery property: #isDead)'.
@@ -134,7 +134,7 @@ MiCriticBrowserTest >> testMiSelectedItem [
 	"propagating the entity for the model to receive it"
 	(browser model) 
 		setEntities: {entity. entityStub} asMooseGroup; 
-		addRule: (MiCBRule named: 'test' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isStub)));
+		addRule: stubRule;
 		runRules.
 	browser updateResultList: browser model getCompleteOutput.
 		

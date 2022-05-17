@@ -62,7 +62,7 @@ MiCriticBrowserRulesMakerPresenterTest >> testCodeButtonAction [
 { #category : #test }
 MiCriticBrowserRulesMakerPresenterTest >> testEditRule [
 	| rule newTitle newQuery newSummary |
-	rule := MiCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]') summary: 'règle utilisée pour un test'.
+	rule := FamixCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]') summary: 'règle utilisée pour un test'.
 	newTitle := 'test édité'.
 	newQuery := '[ :entity | entity isDead ]'.
 	newSummary := 'règle modifiée pour un test'.
@@ -82,8 +82,8 @@ MiCriticBrowserRulesMakerPresenterTest >> testEditRule [
 { #category : #test }
 MiCriticBrowserRulesMakerPresenterTest >> testFillRuleToEdit [
 	| rule queriesBrowserRule |
-	rule := MiCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]') summary: 'règle utilisée pour un test'.
-	queriesBrowserRule := MiCBRule named: 'test2' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)) summary: 'autre règle utilisée pour un test'.
+	rule := FamixCBRule named: 'test' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]') summary: 'règle utilisée pour un test'.
+	queriesBrowserRule := FamixCBRule named: 'test2' on: (MiCriticBrowserFQQuery on: (FQBooleanQuery property: #isDead)) summary: 'autre règle utilisée pour un test'.
 	
 	addQueryPresenter codeButtonAction.
 	addQueryPresenter fillRuleToEdit: rule.

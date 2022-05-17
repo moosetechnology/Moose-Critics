@@ -31,7 +31,7 @@ MiCriticBrowserRulesMakerPresenter >> addInputtedCodeRule [
 	codeInput text ifNotNil: 
 		[ 
 		owner addRule: 
-			(MiCBRule named: (ruleTitle text) 
+			(FamixCBRule named: (ruleTitle text) 
 							on: (MiCriticBrowserPharoCodeQuery on: (codeInput text))
 							summary: ruleSummary text) 
 		].
@@ -43,7 +43,7 @@ MiCriticBrowserRulesMakerPresenter >> addInputtedFQRule [
 	queryDroplist selectedItem ifNotNil: 
 		[ 
 		owner addRule: 
-			(MiCBRule named: (ruleTitle text) 
+			(FamixCBRule named: (ruleTitle text) 
 							on: (MiCriticBrowserFQQuery on: (queryDroplist selectedItem))
 							summary: ruleSummary text) 
 		]

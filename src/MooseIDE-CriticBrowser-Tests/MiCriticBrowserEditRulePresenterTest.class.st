@@ -24,7 +24,7 @@ MiCriticBrowserEditRulePresenterTest >> setUp [
 { #category : #test }
 MiCriticBrowserEditRulePresenterTest >> testHasBeenEdited [
 	| rule stubEntity |
-	rule := MiCBRule named: 'test' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
+	rule := FamixCBRule named: 'test' on: ((MiCriticBrowserPharoCodeQuery on: '[ :entity | entity isStub ]')).
 	stubEntity := FamixStMethod new.
 	stubEntity name: 'test1'; isStub: true.
 	

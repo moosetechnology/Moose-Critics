@@ -15,13 +15,13 @@ Class {
 { #category : #accessing }
 MiCriticBrowserModel >> addRule: aRule [
 
-	(aRule class = MiCBRule) ifTrue: [ rules add: aRule ]
+	(aRule class = FamixCBRule) ifTrue: [ rules add: aRule ]
 ]
 
 { #category : #deleting }
-MiCriticBrowserModel >> deleteRule: aMiCBRule [ 
-	(rules indexOf: aMiCBRule) = 0
-		ifFalse: [ rules remove: aMiCBRule ]
+MiCriticBrowserModel >> deleteRule: aFamixCBRule [ 
+	(rules indexOf: aFamixCBRule) = 0
+		ifFalse: [ rules remove: aFamixCBRule ]
 	
 ]
 
@@ -55,9 +55,9 @@ MiCriticBrowserModel >> output [
 ]
 
 { #category : #accessing }
-MiCriticBrowserModel >> outputOf: aMiCBRule [
-	(output includesKey: aMiCBRule)
-		ifTrue: [ ^ self output at: aMiCBRule ]
+MiCriticBrowserModel >> outputOf: aFamixCBRule [
+	(output includesKey: aFamixCBRule)
+		ifTrue: [ ^ self output at: aFamixCBRule ]
 ]
 
 { #category : #accessing }

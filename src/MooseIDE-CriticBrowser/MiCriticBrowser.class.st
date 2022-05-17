@@ -345,7 +345,7 @@ MiCriticBrowser >> selectedQueries [
 { #category : #naming }
 MiCriticBrowser >> stringForItem: item [
 	(queryResult roots includes: item) ifTrue: [ ^ item description ].
-	^ item name
+	^ item mooseName
 ]
 
 { #category : #'updating screen' }
