@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfFamixModelCritiqueBrowser,
 	#superclass : #BaselineOf,
-	#category : 'BaselineOfFamixModelCritiqueBrowser'
+	#category : #BaselineOfFamixModelCritiqueBrowser
 }
 
 { #category : #baselines }
@@ -12,7 +12,9 @@ BaselineOfFamixModelCritiqueBrowser >> baseline: spec [
 		do: [
 			spec
 				package: 'MooseIDE-CriticBrowser';
-				package: 'MooseIDE-CriticBrowser-Tests'
+				package: 'MooseIDE-CriticBrowser-Tests';
+				package: 'Famix-CriticBrowser-Entities';
+				package: 'Famix-CriticBrowser-Generator'
 			]
 ]
 
