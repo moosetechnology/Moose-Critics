@@ -371,12 +371,16 @@ MiCriticBrowser >> updateQueriesList [
 { #category : #'updating screen' }
 MiCriticBrowser >> updateResultList: aCollection [
 	| roots |
+	aCollection ifNotEmpty: [ 
 	roots := (aCollection allViolatingEntitiesType collect: [ :type | 
 		           aCollection allWithViolatingEntitiesType: type ]) asOrderedCollection.
 	roots do: [ :group | group description: group stringForCBDescription ].
 	queryResult roots:
 		(roots sort: [ :group | group description onlyLetters ] ascending).
-	queryResult roots: roots.
 	queryResult refresh.
+	] ifEmpty: [ 
+	roots := aCollection.
+	queryResult roots: roots
+	].
 	self updateToolbar
 ]
