@@ -226,7 +226,7 @@ MiCriticBrowser >> initializeLists [
 		display: [ :each | self displayQuery: each ];
 		contextMenu: editMenu;
 		beMultipleSelection;
-		whenSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
+		whenMultiSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
 	
 	queryResult
 		display: [ :each | self stringForItem: each ];
