@@ -58,8 +58,8 @@ MiCriticBrowserTest >> testChildrenFor [
 { #category : #test }
 MiCriticBrowserTest >> testDeleteSelectedRule [
 	browser model addRule: stubRule; addRule: deadRule.
-	browser updateQueriesList.
-	browser queries selectItem: stubRule.
+	browser updateRulesList.
+	browser rules selectItem: stubRule.
 	self assert: browser model rules size equals: 2.
 	browser deleteSelectedRule.
 	self assert: browser model rules size equals: 1
@@ -159,19 +159,19 @@ MiCriticBrowserTest >> testRunButtonAction [
 ]
 
 { #category : #test }
-MiCriticBrowserTest >> testSelectedQueries [
+MiCriticBrowserTest >> testSelectedRules [
 	browser model setEntities: { stubEntity. basicEntity } asMooseGroup.
 	browser model addRule: stubRule; addRule: deadRule.
 	browser model runRules.
-	browser updateQueriesList.
+	browser updateRulesList.
 	browser updateResultList: browser model getCompleteOutput.
 	
-	browser queries selectItem: stubRule.
+	browser rules selectItem: stubRule.
 	self assert: browser queryResult roots flatten size equals: 1.
 	self assert: browser queryResult roots flatten anyOne violatingEntity equals: stubEntity.
 	
-	browser queries unselectItem: stubRule.
-	browser queries selectItem: deadRule.
+	browser rules unselectItem: stubRule.
+	browser rules selectItem: deadRule.
 	self assert: browser queryResult roots flatten size equals: 2.
 	self assertCollection: browser queryResult roots flatten asMooseGroup specialize allEntities includesAll: { stubEntity. basicEntity }.
 	
@@ -183,8 +183,8 @@ MiCriticBrowserTest >> testUnselectPrintsCompleteOutput [
 	browser model addRule: stubRule; addRule: deadRule.
 	browser runButtonAction.
 	
-	browser queries selectItem: stubRule.
-	browser queries unselectAll.
+	browser rules selectItem: stubRule.
+	browser rules unselectAll.
 	self assert: (browser queryResult roots flatten size) equals: 3
 
 ]
@@ -197,14 +197,6 @@ MiCriticBrowserTest >> testUpdateEntitiesList [
 	self assert: (browser entitiesList roots flatten size) equals: 1
 ]
 
-{ #category : #tests }
-MiCriticBrowserTest >> testUpdateQueriesList [
-	self assert: browser queries roots size equals: 0.
-	browser model addRule: stubRule.
-	browser updateQueriesList.
-	self assert: browser queries roots size equals: 1
-]
-
 { #category : #test }
 MiCriticBrowserTest >> testUpdateResultList [
 	browser model addRule: stubRule; setEntities: { stubEntity } asMooseGroup; runRules. 
@@ -214,4 +206,12 @@ MiCriticBrowserTest >> testUpdateResultList [
 	
 	browser updateResultList: FamixCBViolationGroup new.
 	self assert: (browser queryResult roots flatten size) equals: 0
+]
+
+{ #category : #tests }
+MiCriticBrowserTest >> testUpdateRulesList [
+	self assert: browser rules roots size equals: 0.
+	browser model addRule: stubRule.
+	browser updateRulesList.
+	self assert: browser rules roots size equals: 1
 ]

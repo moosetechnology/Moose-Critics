@@ -6,7 +6,6 @@ Class {
 	#superclass : #MiAbstractBrowser,
 	#instVars : [
 		'entitiesList',
-		'queries',
 		'editMenu',
 		'runButton',
 		'queryResult',
@@ -15,7 +14,8 @@ Class {
 		'exportButton',
 		'rulesMakerPresenter',
 		'rulesEditorPresenter',
-		'openRulesMakerButton'
+		'openRulesMakerButton',
+		'rules'
 	],
 	#category : #'MooseIDE-CriticBrowser'
 }
@@ -67,7 +67,7 @@ MiCriticBrowser >> defaultLayout [
 			add: (SpPanedLayout newLeftToRight
 				add: (SpBoxLayout new 
 					add: 'Rules' expand: false;
-					add: queries;
+					add: rules;
 					yourself);
 				add: (SpBoxLayout new 
 					add: ('Entities requested' asPresenter) expand: false;
@@ -93,11 +93,11 @@ MiCriticBrowser >> defaultTitle [
 
 { #category : #deleting }
 MiCriticBrowser >> deleteSelectedRule [
-	queries selectedItems do: [ :rule | model deleteRule: rule ] 
+	rules selectedItems do: [ :rule | model deleteRule: rule ] 
 ]
 
 { #category : #'updating screen' }
-MiCriticBrowser >> displayQuery: selectedQuery [
+MiCriticBrowser >> displayRule: selectedQuery [
 "displays the queries, adding the number of entities they get if the query has been executed"
 	^ (model output includesKey: selectedQuery) 
 	ifTrue: 
@@ -148,7 +148,7 @@ MiCriticBrowser >> importRules [
 				readStreamDo: [ :stream | 
 					self importRulesFromStream: stream.
 					Notification signal: 'Import successful!' ] ].
-	self updateQueriesList
+	self updateRulesList
 ]
 
 { #category : #'load and saving' }
@@ -212,7 +212,7 @@ MiCriticBrowser >> initializeButtons [
 { #category : #initialization }
 MiCriticBrowser >> initializeLists [
 	entitiesList := self newTree.
-	queries := self newTree.
+	rules := self newTree.
 	queryResult := self newTree.
 	
 	entitiesList 
@@ -221,12 +221,12 @@ MiCriticBrowser >> initializeLists [
 		activateOnDoubleClick;
 		whenActivatedDo: [ :each | each selectedItem inspect ].
 	
-	queries
+	rules
 		items: self model rules;
-		display: [ :each | self displayQuery: each ];
+		display: [ :each | self displayRule: each ];
 		contextMenu: editMenu;
 		beMultipleSelection;
-		whenMultiSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedQueries ] ].
+		whenMultiSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedRules ] ].
 	
 	queryResult
 		display: [ :each | self stringForItem: each ];
@@ -243,14 +243,14 @@ MiCriticBrowser >> initializeMenu [
 			name: 'Edit rule';
 			icon: (self iconNamed: #glamorousEdit);
 			action: [ 
-				rulesEditorPresenter setRuleToEdit: queries selectedItems anyOne.
+				rulesEditorPresenter setRuleToEdit: rules selectedItems anyOne.
 				rulesEditorPresenter openDialog
 					] ];
 				addItem: [ :item | 
 		item
 			name: 'Delete rule';
 			icon: (self iconNamed: #smallDelete);
-			action: [ self deleteSelectedRule. self updateQueriesList ]
+			action: [ self deleteSelectedRule. self updateRulesList ]
 		] 
 ]
 
@@ -266,7 +266,7 @@ MiCriticBrowser >> initializePresenters [
 	rulesEditorPresenter := MiCriticBrowserEditRulePresenter on: self.
 	
 	self focusOrder
-			add: queries;
+			add: rules;
 			add: queryResult;
 			add: inspectButton;
 			add: openRulesMakerButton;
@@ -283,9 +283,9 @@ MiCriticBrowser >> initializeWindow: aWindowPresenter [
 
 { #category : #accessing }
 MiCriticBrowser >> miSelectedItem [ 
-	^ self queries selectedItems 
+	^ self rules selectedItems 
 		ifEmpty: [ model getCompleteOutput ] 
-		ifNotEmpty: [ model outputOfCollection: (self queries selectedItems) ]
+		ifNotEmpty: [ model outputOfCollection: (self rules selectedItems) ]
 ]
 
 { #category : #'accessing - testing' }
@@ -295,15 +295,15 @@ MiCriticBrowser >> openRulesMakerButton [
 ]
 
 { #category : #'accessing - testing' }
-MiCriticBrowser >> queries [
-"used for testing purposes, do not access outside of tests"
-	^ queries
-]
-
-{ #category : #'accessing - testing' }
 MiCriticBrowser >> queryResult [
 "used for testing purposes, do not access outside of tests"
 	^ queryResult 
+]
+
+{ #category : #'as yet unclassified' }
+MiCriticBrowser >> rules [
+"used for testing purposes, do not access outside of tests"
+	^ rules
 ]
 
 { #category : #'accessing - testing' }
@@ -329,15 +329,15 @@ MiCriticBrowser >> runButtonAction [
 "executes the queries on the entities stored in the model, then prints the results"
 	self model runRules.
 	self updateResultList: model getCompleteOutput.
-	self updateQueriesList
+	self updateRulesList
 ]
 
 { #category : #'selected object' }
-MiCriticBrowser >> selectedQueries [
+MiCriticBrowser >> selectedRules [
 "shows in the output list only the entities validating the selected queries (or the complete output if no query is selected)"
-	(queries selectedItems) 
+	(rules selectedItems) 
 		ifNotEmpty: [
-			self updateResultList: (model outputOfCollection: (queries selectedItems)) ]
+			self updateResultList: (model outputOfCollection: (rules selectedItems)) ]
 		ifEmpty: [ 
 			self updateResultList: model getCompleteOutput ]
 ]
@@ -363,12 +363,6 @@ MiCriticBrowser >> updateEntitiesList [
 ]
 
 { #category : #'updating screen' }
-MiCriticBrowser >> updateQueriesList [
-	queries roots: self model rules.
-	queries refresh
-]
-
-{ #category : #'updating screen' }
 MiCriticBrowser >> updateResultList: aCollection [
 	| roots |
 	aCollection ifNotEmpty: [ 
@@ -383,4 +377,10 @@ MiCriticBrowser >> updateResultList: aCollection [
 	queryResult roots: roots
 	].
 	self updateToolbar
+]
+
+{ #category : #'updating screen' }
+MiCriticBrowser >> updateRulesList [
+	rules roots: self model rules.
+	rules refresh
 ]

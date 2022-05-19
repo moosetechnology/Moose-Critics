@@ -28,7 +28,7 @@ MiCriticBrowserAddRulesPresenter >> addButtonAction [
 { #category : #adding }
 MiCriticBrowserAddRulesPresenter >> addRule: aRule [
 	mainWindow model addRule: aRule.
-	mainWindow updateQueriesList
+	mainWindow updateRulesList
 ]
 
 { #category : #initialization }

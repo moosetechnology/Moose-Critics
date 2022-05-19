@@ -32,11 +32,11 @@ MiCriticBrowserEditRulePresenterTest >> testHasBeenEdited [
 	browser model setEntities: { stubEntity } asMooseGroup.
 	browser model runRules.
 	self assert: (browser model output includesKey: rule) equals: true.
-	browser updateQueriesList.
-	self assert: browser queries roots anyOne name equals: 'test'.
+	browser updateRulesList.
+	self assert: browser rules roots anyOne name equals: 'test'.
 	
 	rule name: 'test édité'.
 	rulesEditor hasBeenEdited: rule.
 	self assert: (browser model output includesKey: rule) equals: false.
-	self assert: browser queries roots anyOne name equals: 'test édité'
+	self assert: browser rules roots anyOne name equals: 'test édité'
 ]
