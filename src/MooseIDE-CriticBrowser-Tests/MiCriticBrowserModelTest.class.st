@@ -36,8 +36,10 @@ MiCriticBrowserModelTest >> testAddRule [
 { #category : #test }
 MiCriticBrowserModelTest >> testDeleteRule [
 	model addRule: stubRule.
+	model runRules.
 	model deleteRule: stubRule.
-	self assert: model rules size equals: 0
+	self assert: model rules size equals: 0.
+	self assert: (model output includesKey: stubRule) equals: false
 ]
 
 { #category : #test }

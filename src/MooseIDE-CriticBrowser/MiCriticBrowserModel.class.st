@@ -19,10 +19,11 @@ MiCriticBrowserModel >> addRule: aRule [
 ]
 
 { #category : #deleting }
-MiCriticBrowserModel >> deleteRule: aFamixCBRule [ 
-	(rules indexOf: aFamixCBRule) = 0
-		ifFalse: [ rules remove: aFamixCBRule ]
-	
+MiCriticBrowserModel >> deleteRule: aFamixCBRule [
+
+	(rules indexOf: aFamixCBRule) = 0 ifTrue: [ ^ self ].
+	rules remove: aFamixCBRule.
+	output removeKey: aFamixCBRule ifAbsent: [ ^ self ]
 ]
 
 { #category : #accessing }
