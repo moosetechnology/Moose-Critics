@@ -69,6 +69,31 @@ FamixCBCustomDTORuleTest >> setUp [
 ]
 
 { #category : #test }
+FamixCBCustomDTORuleTest >> testGetDTOFrom [
+	| res |
+	res := rule getDTOFrom: (rule getEndpointsFrom: (rule getServicesFrom: self model)).
+	self assert: res size equals: 3.
+	self assertCollection: res includesAll: { dtoOne. dtoTwo. dtoThree } 
+]
+
+{ #category : #test }
+FamixCBCustomDTORuleTest >> testGetEndpointsFrom [
+	| res |
+	res := rule getEndpointsFrom: (rule getServicesFrom: self model).
+	self assert: res size equals: 1.
+	self assertCollection: res includesAll: { endpoint }
+]
+
+{ #category : #test }
+FamixCBCustomDTORuleTest >> testGetServicesFrom [
+	| res |
+	res := (rule getServicesFrom: self model).
+	self assert: res size equals: 1.
+	self assertCollection: res includesAll: { service }
+	
+]
+
+{ #category : #test }
 FamixCBCustomDTORuleTest >> testRunOn [
 	self assert: (rule runOn: self model) size equals: 1.
 	self assert: (rule runOn: self model) anyOne violatingEntity equals: dtoOne
@@ -77,23 +102,7 @@ FamixCBCustomDTORuleTest >> testRunOn [
 
 { #category : #test }
 FamixCBCustomDTORuleTest >> testSetDTOs [
-	rule setContextFrom: self model.
+	rule getContextFrom: self model.
 	self assert: rule dtos size equals: 3.
 	self assertCollection: rule dtos includesAll: { dtoOne. dtoTwo. dtoThree } 
-]
-
-{ #category : #test }
-FamixCBCustomDTORuleTest >> testSetEndpoints [
-	rule setServicesFrom: self model.
-	rule setEndpoints.
-	self assert: rule endpoints size equals: 1.
-	self assertCollection: rule endpoints includesAll: { endpoint }
-]
-
-{ #category : #test }
-FamixCBCustomDTORuleTest >> testSetServicesFrom [
-	rule setServicesFrom: self model.
-	self assert: rule services size equals: 1.
-	self assertCollection: rule services includesAll: { service }
-	
 ]
