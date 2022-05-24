@@ -14,7 +14,8 @@ BaselineOfFamixModelCritiqueBrowser >> baseline: spec [
 				package: 'MooseIDE-CriticBrowser';
 				package: 'MooseIDE-CriticBrowser-Tests';
 				package: 'Famix-CriticBrowser-Entities';
-				package: 'Famix-CriticBrowser-Generator'
+				package: 'Famix-CriticBrowser-Generator';
+				package: 'Famix-CriticBrowser-Tests'
 			]
 ]
 
