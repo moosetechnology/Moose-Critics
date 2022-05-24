@@ -15,7 +15,7 @@ Class {
 { #category : #accessing }
 MiCriticBrowserModel >> addRule: aRule [
 
-	(aRule class = FamixCBRule) ifTrue: [ rules add: aRule ]
+	((aRule class inheritsFrom: FamixCBRule) or: [ aRule class = FamixCBRule ]) ifTrue: [ rules add: aRule ]
 ]
 
 { #category : #deleting }
