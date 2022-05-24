@@ -9,6 +9,11 @@ Class {
 	#category : #'Famix-CriticBrowser-Entities'
 }
 
+{ #category : #ston }
+FamixCBCustomDTORule class >> stonAllInstVarNames [
+	^ super stonAllInstVarNames \ #(#mooseID #mooseModel #cache #entityAttributes #violations services endpoints dto)
+]
+
 { #category : #accessing }
 FamixCBCustomDTORule >> dtos [
 
