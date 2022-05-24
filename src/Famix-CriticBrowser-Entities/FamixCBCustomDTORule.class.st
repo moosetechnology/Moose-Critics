@@ -11,7 +11,7 @@ Class {
 
 { #category : #ston }
 FamixCBCustomDTORule class >> stonAllInstVarNames [
-	^ super stonAllInstVarNames \ #(#mooseID #mooseModel #cache #entityAttributes #violations services endpoints dto)
+	^ super stonAllInstVarNames \ #(#mooseID #mooseModel #cache #entityAttributes #violations services endpoints dtos)
 ]
 
 { #category : #accessing }
