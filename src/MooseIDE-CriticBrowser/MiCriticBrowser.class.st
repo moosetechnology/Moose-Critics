@@ -278,7 +278,7 @@ MiCriticBrowser >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
 		title: self defaultTitle;
-		initialExtent: 760 @ 360
+		initialExtent: 1280 @ 560
 ]
 
 { #category : #accessing }

@@ -89,7 +89,7 @@ MiCriticBrowserEditRulePresenter >> initializeWindow: aWindowPresenter [
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter
 		title: self defaultTitle;
-		initialExtent: 460 @ 460
+		initialExtent: 1280 @ 720
 ]
 
 { #category : #accessing }
