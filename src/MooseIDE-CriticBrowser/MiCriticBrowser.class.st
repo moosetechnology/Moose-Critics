@@ -15,7 +15,8 @@ Class {
 		'rulesMakerPresenter',
 		'rulesEditorPresenter',
 		'openRulesMakerButton',
-		'rules'
+		'rules',
+		'expandMenu'
 	],
 	#category : #'MooseIDE-CriticBrowser'
 }
@@ -231,6 +232,7 @@ MiCriticBrowser >> initializeLists [
 	queryResult
 		display: [ :each | self stringForItem: each ];
 		children: [ :each | self children: each for: queryResult ];
+		contextMenu: expandMenu;
 		activateOnDoubleClick;
 		whenActivatedDo: [ :each | each selectedItem inspect ]
 ]
@@ -251,7 +253,20 @@ MiCriticBrowser >> initializeMenu [
 			name: 'Delete rule';
 			icon: (self iconNamed: #smallDelete);
 			action: [ self deleteSelectedRule. self updateRulesList ]
-		] 
+		].
+	expandMenu := self newMenu.
+	expandMenu addItem: [ :item | 
+		item
+			name: 'Collapse all';
+			icon: ((self iconNamed: #windowMenuInactive) rotateBy: -90);
+			action: [ queryResult collapseAll ]
+		];
+	addItem: [ :item | 
+		item
+			name: 'Expand all';
+			icon: ((self iconNamed: #windowMenuInactive) rotateBy: 360);
+			action: [ queryResult expandAll ] 
+			].
 ]
 
 { #category : #accessing }
@@ -376,7 +391,8 @@ MiCriticBrowser >> updateResultList: aCollection [
 	roots := aCollection.
 	queryResult roots: roots
 	].
-	self updateToolbar
+	self updateToolbar.
+	queryResult expandAll
 ]
 
 { #category : #'updating screen' }
