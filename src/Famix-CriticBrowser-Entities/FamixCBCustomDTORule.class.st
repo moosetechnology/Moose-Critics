@@ -28,7 +28,12 @@ FamixCBCustomDTORule >> getDTOFrom: aCollectionOfEndpoints [
 	dtos := dtos | (self selectClassesAndCollectTypesOf: (dtos flatCollect: [ :d | d attributes ]))
 	]
 	doWhileTrue: [ sizePrev < dtos size ].
-	^ dtos
+	
+	^ (dtos flatCollect: [ :c | 
+		c isInterface
+			ifTrue: [ c subclassHierarchy reject: [ :each | each isInterface ] ]
+			ifFalse: [ { c } ] 
+	])
 
 	
 ]
