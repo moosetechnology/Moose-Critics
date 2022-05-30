@@ -1,5 +1,12 @@
 "
-Critique browser for Famix Models.
+I am a MiBrowser used to create rules to apply on the entities of a model. If the entities return true when they are interrogated by the rules (represented through a boolean query), then a violation is created, linking the violating entity and the violated rule.
+Allows to export and import the created rules.
+
+- Follow: Accepts MooseObjects
+
+- Highlight: None
+
+- Propagate: Violations (by rule or on the whole inputed set of rules)
 "
 Class {
 	#name : #MiCriticBrowser,
