@@ -243,7 +243,7 @@ MiCriticBrowser >> initializeMenu [
 			name: 'Edit rule';
 			icon: (self iconNamed: #glamorousEdit);
 			action: [ 
-				rulesEditorPresenter setRuleToEdit: rules selectedItems anyOne.
+				rulesEditorPresenter setRuleToEdit: rules selectedItem.
 				rulesEditorPresenter openDialog
 					] ];
 				addItem: [ :item | 
