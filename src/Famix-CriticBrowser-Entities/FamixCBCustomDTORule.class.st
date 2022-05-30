@@ -52,7 +52,7 @@ FamixCBCustomDTORule >> getServicesFrom: aCollection [
 
 { #category : #'as yet unclassified' }
 FamixCBCustomDTORule >> notDTOTypes [
-	^ { 'Integer'. 'Float'. 'Double'. 'Short'. 'Long'. 'Char'. 'Boolean'. 'Byte'. 'String'. 'Date' }
+	^ { 'Object'. 'File'. 'BigDecimal'. 'Integer'. 'Float'. 'Double'. 'Short'. 'Long'. 'Char'. 'Boolean'. 'Byte'. 'String'. 'Date' }
 ]
 
 { #category : #running }
