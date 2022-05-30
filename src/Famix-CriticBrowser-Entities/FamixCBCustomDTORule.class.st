@@ -17,17 +17,17 @@ FamixCBCustomDTORule >> getContextFrom: aCollection [
 
 { #category : #accessing }
 FamixCBCustomDTORule >> getDTOFrom: aCollectionOfEndpoints [
-	| selectOnlyClasses sizePrev dtos |
-	selectOnlyClasses := [ :a | a declaredType isClass and: [ (self notDTOTypes includes: a declaredType name) not ] ].
+	| sizePrev dtos |
 	
 	dtos := MooseGroup new.
 	dtos := dtos | aCollectionOfEndpoints collect: [ :e | e declaredType ] thenSelect: [ :c | c isClass and: [ (self notDTOTypes includes: c name) not ] ].
-	dtos := dtos | (((aCollectionOfEndpoints flatCollect: [ :e | e parameters ]) select: selectOnlyClasses) collect: [ :p | p declaredType ]).
+	dtos := dtos | (self selectClassesAndCollectTypesOf: (aCollectionOfEndpoints flatCollect: [ :e | e parameters ])).
 	
 	[ 
 	sizePrev := dtos size.
-	dtos := dtos | (((dtos flatCollect: [ :d | d attributes ]) select: selectOnlyClasses) collect: [ :a | a declaredType ])
-	] doWhileTrue: [ sizePrev < dtos size ].
+	dtos := dtos | (self selectClassesAndCollectTypesOf: (dtos flatCollect: [ :d | d attributes ]))
+	]
+	doWhileTrue: [ sizePrev < dtos size ].
 	^ dtos
 
 	
@@ -54,4 +54,9 @@ FamixCBCustomDTORule >> notDTOTypes [
 FamixCBCustomDTORule >> runOn: aCollection [
 	^ ((self query runOnCollection: (self getContextFrom: aCollection)) collect: 
 		[ :each | (FamixCBViolation rule: self violatedBy: each) ]) asMooseGroup specialize.
+]
+
+{ #category : #'as yet unclassified' }
+FamixCBCustomDTORule >> selectClassesAndCollectTypesOf: aCollection [
+	^ aCollection select: [ :each | each declaredType isClass and: [ (self notDTOTypes includes: each declaredType name) not ] ] thenCollect: [ :c | c declaredType ]
 ]
