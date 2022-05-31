@@ -107,9 +107,9 @@ MiCriticBrowser >> deleteSelectedRule [
 { #category : #'updating screen' }
 MiCriticBrowser >> displayRule: selectedQuery [
 "displays the queries, adding the number of entities they get if the query has been executed"
-	^ (model output includesKey: selectedQuery) 
+	^ (model violations includesKey: selectedQuery) 
 	ifTrue: 
-		[ (selectedQuery name), ' (' , ((model output at: selectedQuery) size asString) , ')'] 
+		[ (selectedQuery name), ' (' , ((model violationsOf: selectedQuery) size asString) , ')'] 
 	ifFalse: [ selectedQuery name ]
 ]
 
@@ -237,7 +237,7 @@ MiCriticBrowser >> initializeLists [
 		display: [ :each | self displayRule: each ];
 		contextMenu: editMenu;
 		beMultipleSelection;
-		whenMultiSelectionChangedDo: [ (model output) ifNotEmpty: [ self selectedRules ] ].
+		whenMultiSelectionChangedDo: [ (model violations) ifNotEmpty: [ self selectedRules ] ].
 	
 	queryResult
 		display: [ :each | self stringForItem: each ];
@@ -309,8 +309,8 @@ MiCriticBrowser >> initializeWindow: aWindowPresenter [
 { #category : #accessing }
 MiCriticBrowser >> miSelectedItem [ 
 	^ self rules selectedItems 
-		ifEmpty: [ model getCompleteOutput ] 
-		ifNotEmpty: [ model outputOfCollection: (self rules selectedItems) ]
+		ifEmpty: [ model getAllViolations ] 
+		ifNotEmpty: [ model violationsOfCollection: (self rules selectedItems) ]
 ]
 
 { #category : #'accessing - testing' }
@@ -353,7 +353,7 @@ MiCriticBrowser >> runButton [
 MiCriticBrowser >> runButtonAction [
 "executes the queries on the entities stored in the model, then prints the results"
 	self model runRules.
-	self updateResultList: model getCompleteOutput.
+	self updateResultList: model getAllViolations.
 	self updateRulesList
 ]
 
@@ -362,9 +362,9 @@ MiCriticBrowser >> selectedRules [
 "shows in the output list only the entities validating the selected queries (or the complete output if no query is selected)"
 	(rules selectedItems) 
 		ifNotEmpty: [
-			self updateResultList: (model outputOfCollection: (rules selectedItems)) ]
+			self updateResultList: (model violationsOfCollection: (rules selectedItems)) ]
 		ifEmpty: [ 
-			self updateResultList: model getCompleteOutput ]
+			self updateResultList: model getAllViolations ]
 ]
 
 { #category : #naming }

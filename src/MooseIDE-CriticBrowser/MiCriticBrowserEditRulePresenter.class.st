@@ -52,9 +52,9 @@ MiCriticBrowserEditRulePresenter >> fetchQueries [
 
 { #category : #testing }
 MiCriticBrowserEditRulePresenter >> hasBeenEdited: aRule [
-	mainWindow model removeRuleResult: aRule.
+	mainWindow model removeRuleViolations: aRule.
 	mainWindow updateRulesList.
-	mainWindow updateResultList: mainWindow model getCompleteOutput
+	mainWindow updateResultList: mainWindow model getAllViolations
 ]
 
 { #category : #initialization }

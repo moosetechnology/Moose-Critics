@@ -106,7 +106,7 @@ MiCriticBrowserRulesMakerPresenter >> defaultTitle [
 	^ 'Rules maker'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #editing }
 MiCriticBrowserRulesMakerPresenter >> editRule: aRule [
 	aRule name: ruleTitle text.
 	aRule query: (codeButton state 
@@ -116,7 +116,7 @@ MiCriticBrowserRulesMakerPresenter >> editRule: aRule [
 	owner hasBeenEdited: aRule
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #filling }
 MiCriticBrowserRulesMakerPresenter >> fillRuleToEdit: aRule [
 	ruleTitle text: aRule name.
 	ruleSummary text: aRule summary.

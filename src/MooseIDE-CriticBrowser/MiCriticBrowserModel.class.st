@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'entities',
 		'rules',
-		'output'
+		'violations'
 	],
 	#category : #'MooseIDE-CriticBrowser'
 }
@@ -23,7 +23,7 @@ MiCriticBrowserModel >> deleteRule: aFamixCBRule [
 
 	(rules indexOf: aFamixCBRule) = 0 ifTrue: [ ^ self ].
 	rules remove: aFamixCBRule.
-	output removeKey: aFamixCBRule ifAbsent: [ ^ self ]
+	violations removeKey: aFamixCBRule ifAbsent: [ ^ self ]
 ]
 
 { #category : #accessing }
@@ -33,11 +33,11 @@ MiCriticBrowserModel >> entities [
 ]
 
 { #category : #accessing }
-MiCriticBrowserModel >> getCompleteOutput [
+MiCriticBrowserModel >> getAllViolations [
 "returns violations of every rule"
 	| result |
 	result := FamixCBViolationGroup new.
-	output do: [ :each | result := result , each ].
+	violations do: [ :each | result := result , each ].
 	^ result
 ]
 
@@ -47,34 +47,12 @@ MiCriticBrowserModel >> initialize [
 	super initialize.
 	entities := MooseGroup new.
 	rules := OrderedCollection new.
-	output := Dictionary new.
-]
-
-{ #category : #accessing }
-MiCriticBrowserModel >> output [
-
-	^ output
-]
-
-{ #category : #accessing }
-MiCriticBrowserModel >> outputOf: aFamixCBRule [
-"returns violations for a given rule"
-	(output includesKey: aFamixCBRule)
-		ifTrue: [ ^ self output at: aFamixCBRule ]
-]
-
-{ #category : #accessing }
-MiCriticBrowserModel >> outputOfCollection: aCollection [
-"returns violations for a given set of rules"
-	| result |
-	result := FamixCBViolationGroup new.
-	aCollection do: [ :rule | result := result , (self outputOf: rule) ].
-	^ result 
+	violations := Dictionary new.
 ]
 
 { #category : #removing }
-MiCriticBrowserModel >> removeRuleResult: aRule [
-	output removeKey: aRule ifAbsent: [  ].
+MiCriticBrowserModel >> removeRuleViolations: aRule [
+	violations removeKey: aRule ifAbsent: [  ].
 ]
 
 { #category : #accessing }
@@ -86,7 +64,7 @@ MiCriticBrowserModel >> rules [
 { #category : #execution }
 MiCriticBrowserModel >> runRules [
 "run on the entities every query in the model, and stores in output the result of each query linked to a key (the query)"
-	rules do: [ :each | output at: each put: (each runOn: entities) ].
+	rules do: [ :each | violations at: each put: (each runOn: entities) ].
 	
 ]
 
@@ -95,4 +73,26 @@ MiCriticBrowserModel >> setEntities: aMooseObject [
 	entities := aMooseObject isCollection
 		ifTrue: [ aMooseObject allUsing: FamixTNamedEntity ]
 		ifFalse: [ ({aMooseObject} asMooseGroup) allUsing: FamixTNamedEntity ].
+]
+
+{ #category : #accessing }
+MiCriticBrowserModel >> violations [
+
+	^ violations
+]
+
+{ #category : #accessing }
+MiCriticBrowserModel >> violationsOf: aFamixCBRule [
+"returns violations for a given rule"
+	(violations includesKey: aFamixCBRule)
+		ifTrue: [ ^ self violations at: aFamixCBRule ]
+]
+
+{ #category : #accessing }
+MiCriticBrowserModel >> violationsOfCollection: aCollection [
+"returns violations for a given set of rules"
+	| result |
+	result := FamixCBViolationGroup new.
+	aCollection do: [ :rule | result := result , (self violationsOf: rule) ].
+	^ result 
 ]

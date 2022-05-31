@@ -51,7 +51,7 @@ MiCriticBrowserTest >> testChildrenFor [
 		addRule: stubRule;
 		runRules.
 	
-	browser updateResultList: browser model getCompleteOutput.
+	browser updateResultList: browser model getAllViolations.
 	self assert: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) anyOne violatingEntity equals: entity
 ]
 
@@ -136,7 +136,7 @@ MiCriticBrowserTest >> testMiSelectedItem [
 		setEntities: {entity. entityStub} asMooseGroup; 
 		addRule: stubRule;
 		runRules.
-	browser updateResultList: browser model getCompleteOutput.
+	browser updateResultList: browser model getAllViolations.
 		
 	self assert: browser miSelectedItem size equals: 1.
 	self assert: (browser miSelectedItem anyOne violatingEntity) equals: entityStub 
@@ -154,7 +154,7 @@ MiCriticBrowserTest >> testRunButtonAction [
 	browser model addRule: stubRule.
 	browser runButton performAction.
 	
-	self assert: browser model output size equals: 1 
+	self assert: browser model violations size equals: 1 
 	
 ]
 
@@ -164,7 +164,7 @@ MiCriticBrowserTest >> testSelectedRules [
 	browser model addRule: stubRule; addRule: deadRule.
 	browser model runRules.
 	browser updateRulesList.
-	browser updateResultList: browser model getCompleteOutput.
+	browser updateResultList: browser model getAllViolations.
 	
 	browser rules selectItem: stubRule.
 	self assert: browser queryResult roots flatten size equals: 1.
@@ -201,7 +201,7 @@ MiCriticBrowserTest >> testUpdateEntitiesList [
 MiCriticBrowserTest >> testUpdateResultList [
 	browser model addRule: stubRule; setEntities: { stubEntity } asMooseGroup; runRules. 
 	
-	browser updateResultList: browser model getCompleteOutput.
+	browser updateResultList: browser model getAllViolations.
 	self assert: (browser queryResult roots flatten size) equals: 1.
 	
 	browser updateResultList: FamixCBViolationGroup new.

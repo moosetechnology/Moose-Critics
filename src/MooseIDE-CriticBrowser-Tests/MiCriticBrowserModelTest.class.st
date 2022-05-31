@@ -39,46 +39,28 @@ MiCriticBrowserModelTest >> testDeleteRule [
 	model runRules.
 	model deleteRule: stubRule.
 	self assert: model rules size equals: 0.
-	self assert: (model output includesKey: stubRule) equals: false
+	self assert: (model violations includesKey: stubRule) equals: false
 ]
 
 { #category : #test }
-MiCriticBrowserModelTest >> testGetCompleteOutput [
+MiCriticBrowserModelTest >> testGetAllViolations [
 	model setEntities: { stubEntity. deadEntity } asMooseGroup.
 	model addRule: stubRule; addRule: deadRule.
 	model runRules.
-	self assert: model getCompleteOutput class equals: FamixCBViolationGroup.
-	self assertCollection: model getCompleteOutput allEntities includesAll: { stubEntity. deadEntity }  
+	self assert: model getAllViolations class equals: FamixCBViolationGroup.
+	self assertCollection: model getAllViolations allEntities includesAll: { stubEntity. deadEntity }  
 	
 ]
 
 { #category : #test }
-MiCriticBrowserModelTest >> testOutputOf [
-	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+MiCriticBrowserModelTest >> testRemoveRuleViolations [
 	model addRule: stubRule.
-	model runRules.
-	self assert: (model outputOf: stubRule) class equals: FamixCBViolationGroup.
-	self assertCollection: model getCompleteOutput allEntities includesAll: { stubEntity }
-]
-
-{ #category : #test }
-MiCriticBrowserModelTest >> testOutputOfCollection [
-	model setEntities: { stubEntity. deadEntity } asMooseGroup.
-	model addRule: stubRule; addRule: deadRule.
-	model runRules.
-	self assert: (model outputOfCollection: { stubRule. deadRule }) class equals: FamixCBViolationGroup.
-	self assertCollection: (model outputOfCollection: { stubRule. deadRule }) allEntities includesAll: { stubEntity. deadEntity }
-]
-
-{ #category : #test }
-MiCriticBrowserModelTest >> testRemoveRuleResult [
-	model addRule: stubRule.
-	self assert: (model output includesKey: stubRule) equals: false.
+	self assert: (model violations includesKey: stubRule) equals: false.
 	model setEntities: { } asMooseGroup.
 	model runRules.
-	self assert: (model output includesKey: stubRule) equals: true.
-	model removeRuleResult: stubRule.
-	self assert: (model output includesKey: stubRule) equals: false.
+	self assert: (model violations includesKey: stubRule) equals: true.
+	model removeRuleViolations: stubRule.
+	self assert: (model violations includesKey: stubRule) equals: false.
 	
 ]
 
@@ -86,9 +68,9 @@ MiCriticBrowserModelTest >> testRemoveRuleResult [
 MiCriticBrowserModelTest >> testRunRules [	
 	model setEntities: { stubEntity. deadEntity } asMooseGroup; addRule: stubRule; addRule: deadRule.
 	model runRules.
-	self assert: model output size equals: 2.
-	self assertCollection: ((model outputOf: stubRule) allEntities) includesAll: {stubEntity}.
-	self assertCollection: ((model outputOf: deadRule) allEntities) includesAll: { stubEntity. deadEntity }.
+	self assert: model violations size equals: 2.
+	self assertCollection: ((model violationsOf: stubRule) allEntities) includesAll: {stubEntity}.
+	self assertCollection: ((model violationsOf: deadRule) allEntities) includesAll: { stubEntity. deadEntity }.
 	
 ]
 
@@ -122,4 +104,22 @@ MiCriticBrowserModelTest >> testSetOutput [
 	
 	self assert: (model entities at:1) equals: entityA.
 	self assert: model entities class equals: MooseGroup
+]
+
+{ #category : #test }
+MiCriticBrowserModelTest >> testViolationsOf [
+	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+	model addRule: stubRule.
+	model runRules.
+	self assert: (model violationsOf: stubRule) class equals: FamixCBViolationGroup.
+	self assertCollection: model getAllViolations allEntities includesAll: { stubEntity }
+]
+
+{ #category : #test }
+MiCriticBrowserModelTest >> testViolationsOfCollection [
+	model setEntities: { stubEntity. deadEntity } asMooseGroup.
+	model addRule: stubRule; addRule: deadRule.
+	model runRules.
+	self assert: (model violationsOfCollection: { stubRule. deadRule }) class equals: FamixCBViolationGroup.
+	self assertCollection: (model violationsOfCollection: { stubRule. deadRule }) allEntities includesAll: { stubEntity. deadEntity }
 ]
