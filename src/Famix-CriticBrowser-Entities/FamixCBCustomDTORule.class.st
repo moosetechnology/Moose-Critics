@@ -1,3 +1,6 @@
+"
+I am a custom rule for rules that apply on a DTO class. I fetch the DTO classes internally, so my queries should be coded while keeping in mind that they will be executed on the DTOs only.
+"
 Class {
 	#name : #FamixCBCustomDTORule,
 	#superclass : #FamixCBRule,

@@ -34,6 +34,7 @@ MiCriticBrowserModel >> entities [
 
 { #category : #accessing }
 MiCriticBrowserModel >> getCompleteOutput [
+"returns violations of every rule"
 	| result |
 	result := FamixCBViolationGroup new.
 	output do: [ :each | result := result , each ].
@@ -57,12 +58,14 @@ MiCriticBrowserModel >> output [
 
 { #category : #accessing }
 MiCriticBrowserModel >> outputOf: aFamixCBRule [
+"returns violations for a given rule"
 	(output includesKey: aFamixCBRule)
 		ifTrue: [ ^ self output at: aFamixCBRule ]
 ]
 
 { #category : #accessing }
 MiCriticBrowserModel >> outputOfCollection: aCollection [
+"returns violations for a given set of rules"
 	| result |
 	result := FamixCBViolationGroup new.
 	aCollection do: [ :rule | result := result , (self outputOf: rule) ].

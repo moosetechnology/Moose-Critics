@@ -121,6 +121,7 @@ MiCriticBrowser >> entitiesList [
 
 { #category : #'load and saving' }
 MiCriticBrowser >> exportRules: aCollectionOfRules [
+"opens an UI to choose where to save the rules, before opening a stream and saving on the chosen file"
 	| fileReference |
 	fileReference := UITheme builder
 		chooseForSaveFileReference: 'Choose location'
@@ -146,6 +147,7 @@ MiCriticBrowser >> followEntity: anEntity [
 
 { #category : #'load and saving' }
 MiCriticBrowser >> importRules [
+"opens an UI to choose what rules file to import, before opening a stream on it and importing the rules"
 	| fileReference |
 	fileReference := UITheme builder
 		chooseExistingFileReference: 'Choose rules file to import'
@@ -161,6 +163,7 @@ MiCriticBrowser >> importRules [
 
 { #category : #'load and saving' }
 MiCriticBrowser >> importRulesFromStream: aStream [
+"import rules from a ston rules file opened on a stream"
 	| reader rulesCollection |
 	reader := STONReader on: aStream.
 	rulesCollection := OrderedCollection new.
@@ -322,7 +325,7 @@ MiCriticBrowser >> queryResult [
 	^ queryResult 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'accessing - testing' }
 MiCriticBrowser >> rules [
 "used for testing purposes, do not access outside of tests"
 	^ rules
@@ -366,6 +369,7 @@ MiCriticBrowser >> selectedRules [
 
 { #category : #naming }
 MiCriticBrowser >> stringForItem: item [
+"returns string to describe an item or a root regrouping entities of the same type"
 	(queryResult roots includes: item) ifTrue: [ ^ item description ].
 	^ item mooseName
 ]

@@ -1,3 +1,6 @@
+"
+I am a handler for queries written in Pharo code, meant to be used by a rule in the Critic Browser.
+"
 Class {
 	#name : #MiCriticBrowserPharoCodeQuery,
 	#superclass : #MiCriticBrowserAbstractQuery,
