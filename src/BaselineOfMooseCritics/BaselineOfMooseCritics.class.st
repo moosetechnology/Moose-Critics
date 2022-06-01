@@ -6,17 +6,41 @@ Class {
 
 { #category : #baselines }
 BaselineOfMooseCritics >> baseline: spec [
+
 	<baseline>
+	self mooseIDE: spec.
+	self famix: spec.
+
+	spec for: #common do: [ 
+		spec
+			package: 'MooseIDE-CriticBrowser'
+			with: [ spec requires: 'MooseIDE' ];
+			package: 'MooseIDE-CriticBrowser-Tests'
+			with: [ spec requires: 'MooseIDE-CriticBrowser' ];
+			package: 'Famix-CriticBrowser-Entities'
+			with: [ spec requires: 'Famix' ];
+			package: 'Famix-CriticBrowser-Generator'
+			with: [ spec requires: 'Famix' ];
+			package: 'Famix-CriticBrowser-Tests'
+			with: [ spec requires: 'Famix-CriticBrowser-Entities' ] ]
+]
+
+{ #category : #dependencies }
+BaselineOfMooseCritics >> famix: spec [
+
 	spec
-		for: #common
-		do: [
-			spec
-				package: 'MooseIDE-CriticBrowser';
-				package: 'MooseIDE-CriticBrowser-Tests';
-				package: 'Famix-CriticBrowser-Entities';
-				package: 'Famix-CriticBrowser-Generator';
-				package: 'Famix-CriticBrowser-Tests'
-			]
+		baseline: 'Famix'
+		with: [ 
+		spec repository: 'github://moosetechnology/Famix:development/src' ]
+]
+
+{ #category : #dependencies }
+BaselineOfMooseCritics >> mooseIDE: spec [
+
+	spec
+		baseline: 'MooseIDE'
+		with: [ 
+		spec repository: 'github://moosetechnology/MooseIDE:development/src' ]
 ]
 
 { #category : #accessing }
