@@ -127,11 +127,6 @@ MiCriticBrowserRulesMakerPresenter >> fillRuleToEdit: aRule [
 ]
 
 { #category : #initialization }
-MiCriticBrowserRulesMakerPresenter >> initialize [
-	super initialize
-]
-
-{ #category : #initialization }
 MiCriticBrowserRulesMakerPresenter >> initializeButtons [
 	codeButton := self newRadioButton.
 	queriesBrowserButton := self newRadioButton.

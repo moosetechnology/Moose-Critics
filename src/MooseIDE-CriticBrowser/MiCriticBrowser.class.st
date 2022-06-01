@@ -39,7 +39,7 @@ MiCriticBrowser class >> open [
 	^ super open
 ]
 
-{ #category : #accessing }
+{ #category : #specs }
 MiCriticBrowser class >> title [ 
 	^ 'Model Critic Browser'
 ]
@@ -279,7 +279,7 @@ MiCriticBrowser >> initializeMenu [
 			].
 ]
 
-{ #category : #accessing }
+{ #category : #initialization }
 MiCriticBrowser >> initializePresenters [
 	
 	super initializePresenters.
