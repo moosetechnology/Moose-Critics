@@ -6,13 +6,13 @@ Developed and tested on Moose 10 only.
 Using Metacello:
 ```Smalltalk
 Metacello new
-	repository: 'github://RomainDeg/FamixModel-Critique-Browser';
-	baseline: 'FamixModelCritiqueBrowser';
+	baseline: 'MooseCritics';
+	repository: 'github://moosetechnolgy/Moose-Critics/src';
 	load
 ```
 
 # Launch the Browser
 In a playground:
 ```Smalltalk
-MiCriticBrowserPresenter open
+MiCriticBrowser open
 ```
