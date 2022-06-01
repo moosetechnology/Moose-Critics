@@ -28,6 +28,19 @@ Class {
 	#category : #'MooseIDE-CriticBrowser'
 }
 
+{ #category : #'world menu' }
+MiCriticBrowser class >> menuCommandOn: aBuilder [
+
+	<worldMenu>
+	<miBrowsers>
+	(aBuilder item: #SpecializedBrowser)
+		parent: self midasBrowserMenuLabel;
+		label: self title;
+		icon: (self iconNamed: self menuIconName);
+		help: self helpMessage;
+		action: [ self open ]
+]
+
 { #category : #'instance creation' }
 MiCriticBrowser class >> newModel [
 	^ MiCriticBrowserModel new
