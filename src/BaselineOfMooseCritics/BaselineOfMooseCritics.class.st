@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfFamixModelCritiqueBrowser,
+	#name : #BaselineOfMooseCritics,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfFamixModelCritiqueBrowser
+	#category : #BaselineOfMooseCritics
 }
 
 { #category : #baselines }
-BaselineOfFamixModelCritiqueBrowser >> baseline: spec [
+BaselineOfMooseCritics >> baseline: spec [
 	<baseline>
 	spec
 		for: #common
@@ -20,6 +20,6 @@ BaselineOfFamixModelCritiqueBrowser >> baseline: spec [
 ]
 
 { #category : #accessing }
-BaselineOfFamixModelCritiqueBrowser >> projectClass [
+BaselineOfMooseCritics >> projectClass [
 	^ MetacelloCypressBaselineProject
 ]
