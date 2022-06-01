@@ -7,7 +7,7 @@ Using Metacello:
 ```Smalltalk
 Metacello new
 	baseline: 'MooseCritics';
-	repository: 'github://moosetechnolgy/Moose-Critics/src';
+	repository: 'github://moosetechnology/Moose-Critics/src';
 	load
 ```
 
