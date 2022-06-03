@@ -1,4 +1,4 @@
-# FamixModel-Critique-Browser
+# Moose-Critics
 A Critique Browser-like for Famix models in Moose [work in progress :) ]  
 Developed and tested on Moose 10 only.
 
