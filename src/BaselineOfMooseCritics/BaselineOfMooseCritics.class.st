@@ -10,11 +10,12 @@ BaselineOfMooseCritics >> baseline: spec [
 	<baseline>
 	self mooseIDE: spec.
 	self famix: spec.
+	self stonCustomizer: spec.
 
 	spec for: #common do: [ 
 		spec
 			package: 'MooseIDE-CriticBrowser'
-			with: [ spec requires: 'MooseIDE' ];
+			with: [ spec requires: #('MooseIDE'. 'STONCustomizer') ];
 			package: 'MooseIDE-CriticBrowser-Tests'
 			with: [ spec requires: 'MooseIDE-CriticBrowser' ];
 			package: 'Famix-CriticBrowser-Entities'
@@ -46,4 +47,9 @@ BaselineOfMooseCritics >> mooseIDE: spec [
 { #category : #accessing }
 BaselineOfMooseCritics >> projectClass [
 	^ MetacelloCypressBaselineProject
+]
+
+{ #category : #dependencies }
+BaselineOfMooseCritics >> stonCustomizer: spec [
+	spec baseline: 'STONCustomizer' with: [ spec repository: 'github://jecisc/STONCustomizer:v1.x.x/src' ]
 ]
