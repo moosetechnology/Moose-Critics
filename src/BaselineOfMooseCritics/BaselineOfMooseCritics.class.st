@@ -15,7 +15,7 @@ BaselineOfMooseCritics >> baseline: spec [
 	spec for: #common do: [ 
 		spec
 			package: 'MooseIDE-CriticBrowser'
-			with: [ spec requires: #('MooseIDE'. 'STONCustomizer') ];
+			with: [ spec requires: #( 'MooseIDE' 'STONCustomizer' ) ];
 			package: 'MooseIDE-CriticBrowser-Tests'
 			with: [ spec requires: 'MooseIDE-CriticBrowser' ];
 			package: 'Famix-CriticBrowser-Entities'
