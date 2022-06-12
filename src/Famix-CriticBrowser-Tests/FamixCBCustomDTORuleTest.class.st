@@ -13,8 +13,7 @@ Class {
 		'notService',
 		'endpoint',
 		'notEndpoint',
-		'rule',
-		'dtoFour'
+		'rule'
 	],
 	#category : #'Famix-CriticBrowser-Tests'
 }
@@ -26,13 +25,12 @@ FamixCBCustomDTORuleTest >> model [
 
 { #category : #initialization }
 FamixCBCustomDTORuleTest >> setUp [
-	| remote exception parameter parameterInterface attributeCorrect attributeWrong validQueryMethod |	
+	| remote exception parameter attributeCorrect attributeWrong validQueryMethod |	
 	rule := FamixCBCustomDTORule named: 'Test rule' on: (MiCriticBrowserPharoCodeQuery on: '[ :entity | entity methods anySatisfy: [ :m | m name = ''validReturn'' ] ]').
 	
 	dtoOne := FamixJavaClass named: 'ReturnDTO'.
 	dtoTwo := FamixJavaClass named: 'ParameterDTO'.
 	dtoThree := FamixJavaClass named: 'AttributeDTO'.
-	dtoFour := FamixJavaClass named: 'ImplementorOfDTOInterface'.
 	notDTO := FamixJavaClass named: 'DTOAsAttribute'.
 
 	exception := FamixJavaDeclaredException new.
@@ -42,22 +40,18 @@ FamixCBCustomDTORuleTest >> setUp [
 	service := FamixJavaClass named: 'Service'.
 	service
 		isInterface: true;
-		addSuperInheritance: (FamixJavaInheritance source: service target: remote );
-		addSubInheritance: (FamixJavaInheritance source: dtoFour target: service).
+		addSuperInheritance: (FamixJavaInheritance source: service target: remote ).
 	notService := FamixJavaClass named: 'NotService'.
 	notService addSuperInheritance: (FamixJavaInheritance source: service target: remote ).
 	
 	parameter := FamixJavaParameter named: 'dtoParameter'.
 	parameter declaredType: dtoTwo.
-	parameterInterface  := FamixJavaParameter named: 'dtoInterfaceParameter'.
-	parameterInterface declaredType: service.
 	
 	endpoint := FamixJavaMethod named: 'endpoint'.
 	endpoint
 		parentType: service;
 		declaredType: dtoOne;
 		addParameter: parameter;
-		addParameter: parameterInterface;
 		addDeclaredException: exception.
 	notEndpoint := FamixJavaMethod named: 'notEndpoint'.
 	notEndpoint parentType: service.
@@ -77,8 +71,8 @@ FamixCBCustomDTORuleTest >> setUp [
 FamixCBCustomDTORuleTest >> testGetDTOFrom [
 	| res |
 	res := rule getDTOFrom: (rule getEndpointsFrom: (rule getServicesFrom: self model)).
-	self assert: res size equals: 4.
-	self assertCollection: res includesAll: { dtoOne. dtoTwo. dtoThree. dtoFour } 
+	self assert: res size equals: 3.
+	self assertCollection: res includesAll: { dtoOne. dtoTwo. dtoThree } 
 ]
 
 { #category : #test }
