@@ -3,7 +3,7 @@ Model used by the MooseIDE Critic Browser.
 "
 Class {
 	#name : #MiCriticBrowserModel,
-	#superclass : #Object,
+	#superclass : #MiAbstractModel,
 	#instVars : [
 		'entities',
 		'rules',
