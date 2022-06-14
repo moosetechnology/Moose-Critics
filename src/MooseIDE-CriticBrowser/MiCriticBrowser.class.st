@@ -15,11 +15,11 @@ Class {
 		'entitiesList',
 		'editMenu',
 		'runButton',
-		'queryResult',
+		'rulesResult',
 		'inspectButton',
 		'importButton',
 		'exportButton',
-		'rulesMakerPresenter',
+		'addRulesPresenter',
 		'rulesEditorPresenter',
 		'openRulesMakerButton',
 		'rules',
@@ -57,10 +57,16 @@ MiCriticBrowser class >> title [
 	^ 'Model Critic Browser'
 ]
 
+{ #category : #'accessing - testing' }
+MiCriticBrowser >> addRulesPresenter [
+"used for testing purposes, do not access outside of tests"
+	^ addRulesPresenter
+]
+
 { #category : #'window control' }
 MiCriticBrowser >> browserClosed [
 	super browserClosed.
-	application unregisterConsumer: rulesMakerPresenter
+	application unregisterConsumer: addRulesPresenter
 ]
 
 { #category : #testing }
@@ -92,7 +98,7 @@ MiCriticBrowser >> defaultLayout [
 					yourself);
 				add: (SpBoxLayout new 
 					add: ('Entities requested' asPresenter) expand: false;
-					add: queryResult;
+					add: rulesResult;
 					yourself);
 			yourself);
 		yourself);
@@ -196,7 +202,7 @@ MiCriticBrowser >> importRulesFromStream: aStream [
 { #category : #initialization }
 MiCriticBrowser >> initialize [
 	super initialize.
-	application registerConsumer: rulesMakerPresenter for: FQAbstractQuery 
+	application registerConsumer: addRulesPresenter for: FQAbstractQuery 
 ]
 
 { #category : #initialization }
@@ -210,7 +216,7 @@ MiCriticBrowser >> initializeButtons [
 	openRulesMakerButton
 		label: 'Add rules';
 		icon: (self iconNamed: #smallAdd);
-		action: [ rulesMakerPresenter openDialog ].
+		action: [ addRulesPresenter openDialog ].
 	
 	runButton 
 		label: 'Run';
@@ -237,7 +243,7 @@ MiCriticBrowser >> initializeButtons [
 MiCriticBrowser >> initializeLists [
 	entitiesList := self newTree.
 	rules := self newTree.
-	queryResult := self newTree.
+	rulesResult := self newTree.
 	
 	entitiesList 
 		display: [ :each | self stringForItem: each ];
@@ -252,9 +258,9 @@ MiCriticBrowser >> initializeLists [
 		beMultipleSelection;
 		whenMultiSelectionChangedDo: [ (model violations) ifNotEmpty: [ self selectedRules ] ].
 	
-	queryResult
+	rulesResult
 		display: [ :each | self stringForItem: each ];
-		children: [ :each | self children: each for: queryResult ];
+		children: [ :each | self children: each for: rulesResult ];
 		contextMenu: expandMenu;
 		activateOnDoubleClick;
 		whenActivatedDo: [ :each | each selectedItem inspect ]
@@ -282,13 +288,13 @@ MiCriticBrowser >> initializeMenu [
 		item
 			name: 'Collapse all';
 			icon: ((self iconNamed: #windowMenuInactive) rotateBy: -90);
-			action: [ queryResult collapseAll ]
+			action: [ rulesResult collapseAll ]
 		];
 	addItem: [ :item | 
 		item
 			name: 'Expand all';
 			icon: ((self iconNamed: #windowMenuInactive) rotateBy: 360);
-			action: [ queryResult expandAll ] 
+			action: [ rulesResult expandAll ] 
 			].
 ]
 
@@ -300,12 +306,12 @@ MiCriticBrowser >> initializePresenters [
 	self initializeLists.
 	self initializeButtons.
 	
-	rulesMakerPresenter := MiCriticBrowserAddRulesPresenter on: self.
+	addRulesPresenter := MiCriticBrowserAddRulesPresenter on: self.
 	rulesEditorPresenter := MiCriticBrowserEditRulePresenter on: self.
 	
 	self focusOrder
 			add: rules;
-			add: queryResult;
+			add: rulesResult;
 			add: inspectButton;
 			add: openRulesMakerButton;
 			add: runButton.
@@ -333,12 +339,6 @@ MiCriticBrowser >> openRulesMakerButton [
 ]
 
 { #category : #'accessing - testing' }
-MiCriticBrowser >> queryResult [
-"used for testing purposes, do not access outside of tests"
-	^ queryResult 
-]
-
-{ #category : #'accessing - testing' }
 MiCriticBrowser >> rules [
 "used for testing purposes, do not access outside of tests"
 	^ rules
@@ -351,9 +351,9 @@ MiCriticBrowser >> rulesEditorPresenter [
 ]
 
 { #category : #'accessing - testing' }
-MiCriticBrowser >> rulesMakerPresenter [
+MiCriticBrowser >> rulesResult [
 "used for testing purposes, do not access outside of tests"
-	^ rulesMakerPresenter
+	^ rulesResult 
 ]
 
 { #category : #'accessing - testing' }
@@ -383,7 +383,7 @@ MiCriticBrowser >> selectedRules [
 { #category : #naming }
 MiCriticBrowser >> stringForItem: item [
 "returns string to describe an item or a root regrouping entities of the same type"
-	(queryResult roots includes: item) ifTrue: [ ^ item description ].
+	(rulesResult roots includes: item) ifTrue: [ ^ item description ].
 	^ item mooseName
 ]
 
@@ -408,15 +408,15 @@ MiCriticBrowser >> updateResultList: aCollection [
 	roots := (aCollection allViolatingEntitiesType collect: [ :type | 
 		           aCollection allWithViolatingEntitiesType: type ]) asOrderedCollection.
 	roots do: [ :group | group description: group stringForCBDescription ].
-	queryResult roots:
+	rulesResult roots:
 		(roots sort: [ :group | group description onlyLetters ] ascending).
-	queryResult refresh.
+	rulesResult refresh.
 	] ifEmpty: [ 
 	roots := aCollection.
-	queryResult roots: roots
+	rulesResult roots: roots
 	].
 	self updateToolbar.
-	queryResult expandAll
+	rulesResult expandAll
 ]
 
 { #category : #'updating screen' }

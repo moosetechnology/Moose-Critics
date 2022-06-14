@@ -19,7 +19,7 @@ MiCriticBrowserRulesMakerPresenterTest >> browserClass [
 { #category : #running }
 MiCriticBrowserRulesMakerPresenterTest >> setUp [
 	super setUp.
-	addQueryPresenter := browser rulesMakerPresenter queryPresenter.
+	addQueryPresenter := browser addRulesPresenter queryPresenter.
 	editQueryPresenter := browser rulesEditorPresenter queryPresenter.
 	browser openRulesMakerButton performAction
 
