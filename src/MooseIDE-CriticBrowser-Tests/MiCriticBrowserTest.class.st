@@ -52,7 +52,7 @@ MiCriticBrowserTest >> testChildrenFor [
 		runRules.
 	
 	browser updateResultList: browser model getAllViolations.
-	self assert: (browser children: (browser queryResult roots anyOne) for: (browser queryResult)) anyOne violatingEntity equals: entity
+	self assert: (browser children: (browser rulesResult roots anyOne) for: (browser rulesResult)) anyOne violatingEntity equals: entity
 ]
 
 { #category : #test }
@@ -167,13 +167,13 @@ MiCriticBrowserTest >> testSelectedRules [
 	browser updateResultList: browser model getAllViolations.
 	
 	browser rules selectItem: stubRule.
-	self assert: browser queryResult roots flatten size equals: 1.
-	self assert: browser queryResult roots flatten anyOne violatingEntity equals: stubEntity.
+	self assert: browser rulesResult roots flatten size equals: 1.
+	self assert: browser rulesResult roots flatten anyOne violatingEntity equals: stubEntity.
 	
 	browser rules unselectItem: stubRule.
 	browser rules selectItem: deadRule.
-	self assert: browser queryResult roots flatten size equals: 2.
-	self assertCollection: browser queryResult roots flatten asMooseGroup specialize allEntities includesAll: { stubEntity. basicEntity }.
+	self assert: browser rulesResult roots flatten size equals: 2.
+	self assertCollection: browser rulesResult roots flatten asMooseGroup specialize allEntities includesAll: { stubEntity. basicEntity }.
 	
 ]
 
@@ -185,7 +185,7 @@ MiCriticBrowserTest >> testUnselectPrintsCompleteOutput [
 	
 	browser rules selectItem: stubRule.
 	browser rules unselectAll.
-	self assert: (browser queryResult roots flatten size) equals: 3
+	self assert: (browser rulesResult roots flatten size) equals: 3
 
 ]
 
@@ -202,10 +202,10 @@ MiCriticBrowserTest >> testUpdateResultList [
 	browser model addRule: stubRule; setEntities: { stubEntity } asMooseGroup; runRules. 
 	
 	browser updateResultList: browser model getAllViolations.
-	self assert: (browser queryResult roots flatten size) equals: 1.
+	self assert: (browser rulesResult roots flatten size) equals: 1.
 	
 	browser updateResultList: FamixCBViolationGroup new.
-	self assert: (browser queryResult roots flatten size) equals: 0
+	self assert: (browser rulesResult roots flatten size) equals: 0
 ]
 
 { #category : #tests }
