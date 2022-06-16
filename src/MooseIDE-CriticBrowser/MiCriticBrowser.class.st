@@ -66,7 +66,8 @@ MiCriticBrowser >> addRulesPresenter [
 { #category : #'window control' }
 MiCriticBrowser >> browserClosed [
 	super browserClosed.
-	application unregisterConsumer: addRulesPresenter
+	application unregisterConsumer: addRulesPresenter.
+	application unregisterConsumer: rulesEditorPresenter
 ]
 
 { #category : #testing }
@@ -202,7 +203,8 @@ MiCriticBrowser >> importRulesFromStream: aStream [
 { #category : #initialization }
 MiCriticBrowser >> initialize [
 	super initialize.
-	application registerConsumer: addRulesPresenter for: FQAbstractQuery 
+	application registerConsumer: addRulesPresenter for: FQAbstractQuery.
+	application registerConsumer: rulesEditorPresenter for: FQAbstractQuery
 ]
 
 { #category : #initialization }
